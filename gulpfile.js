@@ -12,6 +12,7 @@ gulp.task('init', function() {
 gulp.task('default', function() {
 
     gulp.src(['resources/lib/jquery/jquery.js',
+            'resources/lib/js/developer.js',
             'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js',
             'resources/lib/bootstrap-sass-official/vendor/javascripts/bootstrap/alert.js',
             'resources/lib/bootstrap-sass-official/vendor/javascripts/bootstrap/button.js',

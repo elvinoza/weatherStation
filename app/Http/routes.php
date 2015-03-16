@@ -19,7 +19,7 @@ Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
-
+//Developer
 Route::group(array('prefix' => 'developer'), function(){
 
     //login page
@@ -50,11 +50,44 @@ Route::group(array('prefix' => 'developer'), function(){
 
     Route::get('/dashboard', array(
         'as' => 'developer.dashboard',
-        'uses' => 'DeveloperController@dashboard'
+        'uses' => 'Auth\AuthController@dashboard'
     ));
 
     Route::get('/logout', array(
         'as' => 'developer.logout',
         'uses' => 'Auth\AuthController@getLogout'
     ));
+
+    Route::get('/station', array(
+        'as' => 'developer.station',
+        'uses' => 'DeveloperController@updateForm'
+    ));
+
+    Route::post('/update', array(
+        'as' => 'developer.update',
+        'uses' => 'DeveloperController@updateInfo'
+    ));
+
+    Route::get('/getNewKey', array(
+        'as' => 'developer.generateNewKey',
+        'uses' => 'DeveloperController@regenerateAppKey'
+    ));
+
+    Route::get('/data', 'DeveloperController@getStationData');
+
+});
+
+//api
+Route::group(array('prefix' => 'api/v1'), function(){
+    //api/vi/get?app_id=3RkTSJ&app_key=KjdTEANlw6YPxKIPORINgmMKzQBTJtDt
+    Route::get('/set', 'ApiController@insert');
+
+    Route::get('/tryy', 'ApiController@tryy');
+
+    //api/v1/get?id=123456&type=all
+    Route::get('/get/{id}/all', 'ApiController@getAllData');
+
+    //groupby : all, day, month, hour
+    Route::get('get/{id}/byDate/{startDate}/{endDate}/{groupBy?}', 'ApiController@getByDate');
+
 });

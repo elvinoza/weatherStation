@@ -63,7 +63,6 @@ class AuthController extends Controller {
             }
             else $api_credentials = false;
         }
-
         $this->user->id = $app_id;
         $this->user->app_key = $app_key;
         $this->user->station_name = $request->station_name;
@@ -94,7 +93,7 @@ class AuthController extends Controller {
     {
         if ($this->auth->attempt($request->only('email', 'password')))
         {
-            return redirect()->route('developer.dashboard');
+            return redirect()->route('developer.index');
         }
 
         return redirect()->route('developer.sign-in')->withErrors([
@@ -127,6 +126,12 @@ class AuthController extends Controller {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function dashboard()
+    {
+        var_dump("asd");
+        return view('developer.dashboard');
     }
 
 }

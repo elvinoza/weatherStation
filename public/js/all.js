@@ -9788,6 +9788,17 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 })( window );
 
+/**
+ * Created by elvinas on 3/7/15.
+ */
+$().ready(function(){
+
+    $('#regenerate').click(function(){
+        alert("not implemented");
+    });
+
+
+});
 /* ========================================================================
  * Bootstrap: affix.js v3.1.1
  * http://getbootstrap.com/javascript/#affix

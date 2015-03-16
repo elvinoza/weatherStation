@@ -31,4 +31,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password'];
 
+    public function weathers()
+    {
+        return $this->hasMany('App\Weather');
+    }
+
 }

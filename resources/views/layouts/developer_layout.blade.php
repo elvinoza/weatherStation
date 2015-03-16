@@ -13,11 +13,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Weather Station API</a>
+                    <a class="navbar-brand" href="{{ route('developer.index') }}">Weather Station API</a>
                 </div>
-                <div id="navbar" class="navbar-collapse collapse">
+                <div id="navbar" class="navbar-collapse collapse right">
+                    <ul class="nav navbar-nav ">
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
                     @if( Auth::check())
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav ">
+                            <li><a href="{{ route('developer.station') }}">{{ Auth::user()->station_name }}</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav pull-right">
                             <li><a href="{{ route('developer.logout') }}">Logout</a></li>
                         </ul>
                     @else
