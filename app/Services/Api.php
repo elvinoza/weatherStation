@@ -61,7 +61,12 @@ class Api {
     {
         $this->user = $this->user->find($this->app_id);
         if($this->user != null){
-            return $this->user->weathers->where('temperature', '>' , '15');
+            $w = $this->user->weathers()->where('created_at', '>=', $start_date )->Where('created_at', '<=', $end_date)->get();
+//            $weathers = $this->user->whereHas('weathers', function($q){
+//                $q->where('temperature', '=', 1.10);
+//            })->get();
+//            return $weathers;
+            return $w;
         } else {
             return array('success' => 'false', 'error' => 'Station not found');
         }

@@ -19,8 +19,8 @@ class CreateWeathersTabe extends Migration {
             $table->double('temperature',4,2);
             $table->double('humidity',4,2);
             $table->double('light_level',4,2);
-            $table->double('pressure',4,2);
-            $table->double('wind_direction',4,2);
+            $table->double('pressure',8,2);
+            $table->integer('wind_direction');
             $table->double('wind_speed',4,2);
             $table->double('rain',4,2);
 			$table->timestamps();

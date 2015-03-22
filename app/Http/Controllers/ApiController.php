@@ -52,7 +52,8 @@ class ApiController extends Controller {
     public function getByDate($id, $startDate, $endDate, $groupBy = "all")
     {
         $api = new Api($id, null, $this->user);
-        dd($api->getDataByDate($startDate,$endDate, $groupBy));
+        $q = $api->getDataByDate($startDate,$endDate, $groupBy);
+        dd($q);
     }
 
     public function tryy(){
