@@ -56,6 +56,11 @@ class ApiController extends Controller {
         dd($q);
     }
 
+    public function getStations()
+    {
+        return response()->json($this->user->all(['id', 'station_name']));
+    }
+
     public function tryy(){
         return response()->json(['a'=>'b']);
     }

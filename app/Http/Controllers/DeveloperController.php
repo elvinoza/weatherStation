@@ -6,8 +6,10 @@
  * Time: 4:09 PM
  */
 namespace App\Http\Controllers;
+use App\Http\Requests\Auth\ChangePasswordRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\View;
 use App\Http\Requests\Auth\UpdateUserInfoRequest;
 use App\User;
@@ -42,8 +44,17 @@ class DeveloperController extends Controller {
         return redirect()->route('developer.station');
     }
 
-    public function changePassword(){
+    public function changePassword(ChangePasswordRequest $request){
 
+        if(Hash::check($request->current_password, $this->user->password))
+        {
+            $this->user->password = bcrypt($request->new_password);
+            $this->user->save();
+            return redirect()->route('developer.station')->with(['successful' => 'Password changed!']);
+        }
+        return redirect()->route('developer.station')->withErrors([
+            'email' => 'You entered wrong password!'
+        ]);
     }
 
     public function regenerateAppKey(Request $request){

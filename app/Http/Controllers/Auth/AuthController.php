@@ -127,11 +127,4 @@ class AuthController extends Controller {
         }
         return $randomString;
     }
-
-    public function dashboard()
-    {
-        var_dump("asd");
-        return view('developer.dashboard');
-    }
-
 }

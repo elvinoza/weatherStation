@@ -68,6 +68,11 @@ Route::group(array('prefix' => 'developer'), function(){
         'uses' => 'DeveloperController@updateInfo'
     ));
 
+    Route::post('/password/change', array(
+        'as' => 'developer.change-pass',
+        'uses' => 'DeveloperController@changePassword'
+    ));
+
     Route::get('/getNewKey', array(
         'as' => 'developer.generateNewKey',
         'uses' => 'DeveloperController@regenerateAppKey'
@@ -84,6 +89,7 @@ Route::group(array('prefix' => 'api/v1'), function(){
 
     Route::get('/tryy', 'ApiController@tryy');
 
+    Route::get('get/stations-list', 'ApiController@getStations');
     //api/v1/get?id=123456&type=all
     Route::get('/get/{id}/all', 'ApiController@getAllData');
 

@@ -6,6 +6,9 @@
         @foreach($errors->all() as $error)
         <p class="alert alert-danger">{!!$error!!}</p>
         @endforeach
+        @if(Session::has('successful'))
+        <p class="alert alert-success">{!! Session::get('successful') !!}</p>
+        @endif
         <form class="form form-horizontal">
             <div class="form-group">
                 <label class="col-sm-3">Your app id</label>
@@ -46,7 +49,7 @@
             {!!Form::submit('Update',['class'=>'btn btn-default'])!!}
         </div>
         {!! Form::close() !!}
-        {!! Form::open(['route'=>'developer.update','class'=>'form form-horizontal','style'=>'margin-top:50px']) !!}
+        {!! Form::open(['route'=>'developer.change-pass','class'=>'form form-horizontal','style'=>'margin-top:50px']) !!}
         <div class="form-group">
             {!! Form::label('current_password','Current password:',['class'=>'col-sm-3 control-label']) !!}
             <div class="col-sm-8">
