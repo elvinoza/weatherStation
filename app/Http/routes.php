@@ -96,4 +96,7 @@ Route::group(array('prefix' => 'api/v1'), function(){
     //groupby : all, day, month, hour
     Route::get('get/{id}/byDate/{startDate}/{endDate}/{groupBy?}', 'ApiController@getByDate');
 
+    Route::get('get/temperatures/{id}/{format}', 'ApiController@getStationTemperature');
+
+    Route::get('get/firstStation', 'ApiController@getFirstStation');
 });

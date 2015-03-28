@@ -1,0 +1,27 @@
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" ng-controller="TemperatureController">
+                            <h3 class="panel-title col-lg-8">Temperatures</h3>
+
+                            <div class="btn-group" ng-change="getTemperatures()" ng-init="tempType = 'Hour'">
+                                <label class="btn btn-primary" ng-model="tempType" btn-radio="'h'">Hour</label>
+                                <label class="btn btn-primary" ng-model="tempType" btn-radio="'d'">Day</label>
+                                <label class="btn btn-primary" ng-model="tempType" btn-radio="'w'">Week</label>
+                                <label class="btn btn-primary" ng-model="tempType" btn-radio="'m'">Month</label>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-line-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

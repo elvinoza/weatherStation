@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Services\Api;
 use App\User;
 use App\Weather;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -59,6 +60,18 @@ class ApiController extends Controller {
     public function getStations()
     {
         return response()->json($this->user->all(['id', 'station_name']));
+    }
+
+    //day, month, hour, week
+    public function getStationTemperature($id, $format)
+    {
+        $api = new Api($id, null, $this->user);
+        $temperatures = $api->getStationTemp($format);
+        return response()->json($temperatures);
+    }
+
+    public function getFirstStation(){
+        return response()->json($this->user->all(['id'])->last());
     }
 
     public function tryy(){

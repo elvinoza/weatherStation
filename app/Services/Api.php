@@ -9,6 +9,8 @@ namespace App\Services;
 
 use App\User;
 use App\Weather;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Api {
 
@@ -36,13 +38,13 @@ class Api {
 
     public function insertStationData($temperature, $humidity, $light_level, $pressure, $wind_direction, $wind_speed, $rain){
         $weather = new Weather(array(
-                'temperature'     => $temperature,
-                'humidity'        => $humidity,
-                'light_level'     => $light_level,
-                'pressure'         => $pressure,
-                'wind_direction'  => $wind_direction,
-                'wind_speed'      => $wind_speed,
-                'rain'            => $rain
+            'temperature'     => $temperature,
+            'humidity'        => $humidity,
+            'light_level'     => $light_level,
+            'pressure'         => $pressure,
+            'wind_direction'  => $wind_direction,
+            'wind_speed'      => $wind_speed,
+            'rain'            => $rain
         ));
         $this->user->weathers()->save($weather);
     }
@@ -73,6 +75,46 @@ class Api {
 
     }
 
+    public function getStationTemp($format)
+    {
+        $this->user = $this->user->find($this->app_id);
+        if($this->user != null)
+        {
+            if($format == "h"){
+                $t = $this->user->weathers()
+                                ->where('created_at', '>=', Carbon::now()->subHour())
+                                ->select(['temperature', DB::raw("DATE_FORMAT(created_at, '%h:%i') as date")])->get();
+                return $t;
+            }
+            else if($format == "m"){
+                $t = $this->user->weathers()
+                                ->where('created_at', '>=', Carbon::now()->subMonth())
+                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw('DAY(created_at) AS date')])
+                                ->groupBy('date')
+                                ->get();
+                return $t;
+            }
+            else if($format == "d"){
+                $t = $this->user->weathers()
+                                ->where('created_at', '>=', Carbon::now()->subDay())
+                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw('HOUR(created_at) AS date')])
+                                ->groupBy('date')
+                                ->get();
+                return $t;
+            }
+            else if($format == "w"){
+                $t = $this->user->weathers()
+                                ->where('created_at', '>=', Carbon::now()->subWeek())
+                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw('DAY(created_at) AS date')])
+                                ->groupBy('date')
+                                ->get();
+                return $t;
+            }
+
+        } else {
+            return array('success' => 'false', 'error' => 'Station not found');
+        }
+    }
 
     public function regenerateKey($length){
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';

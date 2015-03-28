@@ -4,7 +4,7 @@
 </head>
 <body>
     @section('nav-bar')
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-default ">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -32,14 +32,12 @@
                             <li><a href="{{ route('developer.sign-in') }}">Sign in</a></li>
                         </ul>
                     @endif
-
-
                 </div><!--/.nav-collapse -->
             </div>
         </nav>
     @show
-    <div class="jumbotron">
-    </div>
+<!--    <div class="jumbotron">-->
+<!--    </div>-->
     <div class="container">
         @yield('content')
     </div> <!-- /container -->
