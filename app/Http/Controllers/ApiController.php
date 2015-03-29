@@ -74,6 +74,12 @@ class ApiController extends Controller {
         return response()->json($this->user->all(['id'])->last());
     }
 
+    public function getLastStationInformation($id){
+        $api = new Api($id, null, $this->user);
+        $information = $api->getLastInformation();
+        return response()->json($information);
+    }
+
     public function tryy(){
         return response()->json(['a'=>'b']);
     }

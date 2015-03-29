@@ -8,7 +8,7 @@ var paths = {
     scripts: [
         'resources/app/app.js',
         'resources/app/controllers/controllers.js',
-        'resources/app/services/services.js'
+        'resources/app/services/apiService.js'
     ]
 };
 
@@ -37,9 +37,10 @@ gulp.task('scripts', function(){
             'resources/lib/Chart.js/Chart.js',
             'resources/lib/angular-chart.js/angular-chart.js',
             'resources/lib/js/ui-bootstrap-tpls-0.12.1.min.js',
+            'resources/lib/ngprogress/build/ngProgress.js',
             'resources/app/app.js',
             'resources/app/controllers/controllers.js',
-            'resources/app/services/services.js'
+            'resources/app/services/apiService.js'
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('public/js'));
@@ -65,9 +66,10 @@ gulp.task('default', function() {
             'resources/lib/Chart.js/Chart.js',
             'resources/lib/angular-chart.js/angular-chart.js',
             'resources/lib/js/ui-bootstrap-tpls-0.12.1.min.js',
+            'resources/lib/ngprogress/build/ngProgress.js',
             'resources/app/app.js',
             'resources/app/controllers/controllers.js',
-            'resources/app/services/services.js'
+            'resources/app/services/apiService.js'
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('public/js'));

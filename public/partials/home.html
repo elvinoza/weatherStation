@@ -22,13 +22,12 @@
             </div>
 
             <div class="panel-body">
-                <div ng-controller="StationsList">
+                <div>
                     <div class="dropdown">
                         <div>
                             <select class="form-control" ng-model="stId" ng-change="setStationId(stId.id)" ng-options="station.station_name for station in stations"></select><br>
                         </div>
                     </div>
-                    <!--<a href="#/temperature/<% stId.id %>">loo</a>-->
                 </div>
             </div>
         </div>
@@ -36,13 +35,14 @@
     <div class="col-lg-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Online <span class="badge">4 minutes ago</span></h3>
+
             </div>
             <div class="panel-body">
                 <div class="list-group">
                     <a href="#" class="list-group-item">
-                        <span class="badge">just now</span>
-                        <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                        <span class="badge"><% temperature %></span>
+                        <i class="fa fa-fw fa-calendar"></i> Temperature
                     </a>
                     <a href="#" class="list-group-item">
                         <span class="badge">4 minutes ago</span>

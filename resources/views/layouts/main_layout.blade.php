@@ -71,8 +71,8 @@
                     <li ng-class="{ active: isActive('/') }">
                         <a href="#/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
-                    <li ng-class="{ active: isActive('/charts') }">
-                        <a href="#/charts"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    <li ng-class="{ active: isActive('/charts/') }">
+                        <a href="#/charts/<% gstationId %>"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                     <li ng-class="{ active: isActive('/tables') }">
                         <a href="#/tables"><i class="fa fa-fw fa-table"></i> Tables</a>

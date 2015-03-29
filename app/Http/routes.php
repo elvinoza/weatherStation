@@ -99,4 +99,6 @@ Route::group(array('prefix' => 'api/v1'), function(){
     Route::get('get/temperatures/{id}/{format}', 'ApiController@getStationTemperature');
 
     Route::get('get/firstStation', 'ApiController@getFirstStation');
+
+    Route::get('get/lastStationInformation/{id}', 'ApiController@getLastStationInformation');
 });

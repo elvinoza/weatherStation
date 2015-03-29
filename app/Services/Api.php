@@ -89,7 +89,7 @@ class Api {
             else if($format == "m"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subMonth())
-                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw('DAY(created_at) AS date')])
+                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
                                 ->groupBy('date')
                                 ->get();
                 return $t;
@@ -97,7 +97,7 @@ class Api {
             else if($format == "d"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subDay())
-                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw('HOUR(created_at) AS date')])
+                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw("DATE_FORMAT(created_at, '%m-%d %hh') AS date")])
                                 ->groupBy('date')
                                 ->get();
                 return $t;
@@ -105,13 +105,25 @@ class Api {
             else if($format == "w"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subWeek())
-                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw('DAY(created_at) AS date')])
+                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
                                 ->groupBy('date')
                                 ->get();
                 return $t;
             }
 
         } else {
+            return array('success' => 'false', 'error' => 'Station not found');
+        }
+    }
+
+    public function getLastInformation(){
+        $this->user = $this->user->find($this->app_id);
+        if($this->user != null){
+            $information = $this->user->weathers
+                                     ->last();
+            return $information;
+        }
+        else {
             return array('success' => 'false', 'error' => 'Station not found');
         }
     }

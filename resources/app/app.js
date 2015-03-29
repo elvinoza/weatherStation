@@ -2,7 +2,7 @@
  * Created by elvinas on 3/26/15.
  */
 
-var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstrap'], function($interpolateProvider){
+var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstrap', 'ngProgress'], function($interpolateProvider){
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 })
@@ -10,14 +10,14 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
 
     $routeProvider
         .when('/',{
-            controller: "StationsList",
+            controller: "HomeController",
             templateUrl: "partials/home.html"
         })
         .when('/temperature/:stationId', {
             controller: "TemperatureController",
             templateUrl: "partials/temperature.html"
         })
-        .when('/charts', {
+        .when('/charts/:gstationId', {
             controller: "ChartsController",
             templateUrl: "partials/charts.html"
         })
@@ -25,13 +25,17 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
         .otherwise({ redirectTo: "/" });
     }])
     .run(function($rootScope, apiService){
-        $rootScope.gstationId = '';
+        $rootScope.gstationId = "3RkTSJ";
 
         apiService.getFirstStation().success(function(data){
-            $rootScope.gstationId = data.id;
+            gstationId = data.id;
         });
 
-        $rootScope.setStationId = function(id){
-            $rootScope.gstationId = id;
-        };
+//        $rootScope.setStationId = function(id){
+//            $rootScope.gstationId = id;
+//        };
+
+        $rootScope.getStationId = function(){
+            return $rootScope.gstationId;
+        }
     });
