@@ -17,16 +17,25 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends Controller {
 
+    /**
+     * @var \App\User
+     */
     protected $user;
 
-    //protected $api;
 
+    /**
+     * @param User $user
+     */
     public function __construct(User $user)
     {
         $this->user = $user;
         //$this->api = $api;
     }
 
+    /**
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function insert(){
         //$app_id = Input::get('app_id');
         //$app_key = Input::get('app_key');
@@ -43,6 +52,10 @@ class ApiController extends Controller {
         }
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getAllData($id)
     {
         $api = new Api($id, null, $this->user);
@@ -50,6 +63,13 @@ class ApiController extends Controller {
         return response()->json($weathers);
     }
 
+
+    /**
+     * @param $id
+     * @param $startDate
+     * @param $endDate
+     * @param string $groupBy
+     */
     public function getByDate($id, $startDate, $endDate, $groupBy = "all")
     {
         $api = new Api($id, null, $this->user);
@@ -57,30 +77,66 @@ class ApiController extends Controller {
         dd($q);
     }
 
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getStations()
     {
         return response()->json($this->user->all(['id', 'station_name']));
     }
 
     //day, month, hour, week
+    /**
+     * @param $id
+     * @param $format
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getStationTemperature($id, $format)
     {
         $api = new Api($id, null, $this->user);
-        $temperatures = $api->getStationTemp($format);
+        $temperatures = $api->getStationDataByFormat($format, 'temperature');
         return response()->json($temperatures);
     }
 
+
+    /**
+     * @param $id
+     * @param $format
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationHumidity($id, $format)
+    {
+        $api = new Api($id, null, $this->user);
+        $humidities = $api->getStationDataByFormat($format, 'humidity');
+        return response()->json($humidities);
+    }
+
+
+    /**
+     * @param $id
+     * @param $format
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationWindSpeed($id, $format){
+        $api = new Api($id, null, $this->user);
+        $speeds = $api->getStationDataByFormat($format, 'wind_speed');
+        return response()->json($speeds);
+    }
+    /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getFirstStation(){
         return response()->json($this->user->all(['id'])->last());
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getLastStationInformation($id){
         $api = new Api($id, null, $this->user);
         $information = $api->getLastInformation();
         return response()->json($information);
-    }
-
-    public function tryy(){
-        return response()->json(['a'=>'b']);
     }
 }

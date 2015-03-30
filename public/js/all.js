@@ -43010,7 +43010,7 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
             ngProgress.start();
             count = 0;
         }
-    }, 600);
+    }, 700);
 
     $scope.$on('$destroy', function () {
         $interval.cancel(int);
@@ -43028,7 +43028,7 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
             $scope.rain = data.rain;
 
         });
-    }, 60000);
+    }, 70000);
 
     $scope.getStationId();
     $scope.getStationInformation();
@@ -43060,10 +43060,9 @@ stationsApp.controller("NavBarController", function($scope, $location){
 stationsApp.controller("ChartsController", function($scope, $routeParams, apiService){
 
     $scope.stationId = $routeParams.gstationId;
-
     $scope.tempType = "h";
     $scope.humType = "h";
-    $scope.humType = "h";
+    $scope.windSpeedType = "h";
 
     $scope.getTemperatureChart = function(tempType){
         $scope.tempType = tempType;
@@ -43076,7 +43075,32 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         });
     };
 
-    $scope.getTemperatureChart("h");
+    $scope.getHumidityChart = function(humType){
+        $scope.humType = humType;
+        apiService.getStationHumidity($scope.stationId, humType).success(function(data){
+            $scope.humLabels = [];
+            $scope.humData = [];
+            $scope.humLabels = data.map(function(item){ return item.date;})
+            $scope.humSeries = ['Humidity'];
+            $scope.humData.push(data.map(function(item){ return item.humidity;}));
+        });
+    };
+
+    $scope.getWindSpeedChart = function(windSpeedType){
+        $scope.windSpeedType = windSpeedType;
+        apiService.getStationWindSpeed($scope.stationId, windSpeedType).success(function(data){
+            $scope.windSpeedLabels = [];
+            $scope.windSpeedData = [];
+            $scope.windSpeedLabels = data.map(function(item){ return item.date;})
+            $scope.windSpeedSeries = ['Wind speed'];
+            $scope.windSpeedData.push(data.map(function(item){ return item.wind_speed;}));
+        });
+    };
+
+    //initial charts
+    $scope.getTemperatureChart($scope.tempType);
+    $scope.getHumidityChart($scope.humType);
+    $scope.getWindSpeedChart($scope.windSpeedType);
 });
 
 stationsApp.controller("LiveController", function($scope, apiService){
@@ -43090,6 +43114,14 @@ stationsApp.service('apiService', function($http){
 
     this.getStationTemperature = function(id, format){
         return $http.get(baseURL + 'get/temperatures/' + id + '/' + format);
+    };
+
+    this.getStationHumidity = function(id, format){
+        return $http.get(baseURL + 'get/humidities/' + id + '/' + format);
+    };
+
+    this.getStationWindSpeed = function(id, format){
+        return $http.get(baseURL + 'get/wind_speeds/' + id + '/' + format);
     };
 
     this.getFirstStation = function(){

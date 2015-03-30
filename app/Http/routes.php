@@ -87,8 +87,6 @@ Route::group(array('prefix' => 'api/v1'), function(){
     //api/vi/get?app_id=3RkTSJ&app_key=KjdTEANlw6YPxKIPORINgmMKzQBTJtDt
     Route::get('/set', 'ApiController@insert');
 
-    Route::get('/tryy', 'ApiController@tryy');
-
     Route::get('get/stations-list', 'ApiController@getStations');
     //api/v1/get?id=123456&type=all
     Route::get('/get/{id}/all', 'ApiController@getAllData');
@@ -97,6 +95,10 @@ Route::group(array('prefix' => 'api/v1'), function(){
     Route::get('get/{id}/byDate/{startDate}/{endDate}/{groupBy?}', 'ApiController@getByDate');
 
     Route::get('get/temperatures/{id}/{format}', 'ApiController@getStationTemperature');
+
+    Route::get('get/humidities/{id}/{format}', 'ApiController@getStationHumidity');
+
+    Route::get('get/wind_speeds/{id}/{format}', 'ApiController@getStationWindSpeed');
 
     Route::get('get/firstStation', 'ApiController@getFirstStation');
 

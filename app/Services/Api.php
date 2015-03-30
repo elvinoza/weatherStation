@@ -18,7 +18,11 @@ class Api {
     protected $app_key;
     protected $user;
 
-
+    /**
+     * @param $app_id
+     * @param $app_key
+     * @param User $user
+     */
     public function __construct($app_id, $app_key, User $user)
     {
         $this->app_id = $app_id;
@@ -26,6 +30,9 @@ class Api {
         $this->user = $user;
     }
 
+    /**
+     * @return bool
+     */
     public function authenticate(){
         $this->user = $this->user->find($this->app_id);
         if($this->user != null)
@@ -36,6 +43,15 @@ class Api {
         else return false;
     }
 
+    /**
+     * @param $temperature
+     * @param $humidity
+     * @param $light_level
+     * @param $pressure
+     * @param $wind_direction
+     * @param $wind_speed
+     * @param $rain
+     */
     public function insertStationData($temperature, $humidity, $light_level, $pressure, $wind_direction, $wind_speed, $rain){
         $weather = new Weather(array(
             'temperature'     => $temperature,
@@ -49,6 +65,9 @@ class Api {
         $this->user->weathers()->save($weather);
     }
 
+    /**
+     * @return array|mixed
+     */
     public function getAllData(){
         $this->user = $this->user->find($this->app_id);
         if($this->user != null){
@@ -59,6 +78,12 @@ class Api {
         }
     }
 
+    /**
+     * @param $start_date
+     * @param $end_date
+     * @param $group
+     * @return array
+     */
     public function getDataByDate($start_date, $end_date, $group)
     {
         $this->user = $this->user->find($this->app_id);
@@ -75,7 +100,12 @@ class Api {
 
     }
 
-    public function getStationTemp($format)
+    /**
+     * @param $format
+     * @param $option
+     * @return array
+     */
+    public function getStationDataByFormat($format, $option)
     {
         $this->user = $this->user->find($this->app_id);
         if($this->user != null)
@@ -83,13 +113,14 @@ class Api {
             if($format == "h"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subHour())
-                                ->select(['temperature', DB::raw("DATE_FORMAT(created_at, '%h:%i') as date")])->get();
+                                ->select([$option, DB::raw("DATE_FORMAT(created_at, '%H:%i') as date")])->get();
                 return $t;
             }
             else if($format == "m"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subMonth())
-                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
+                                ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
+
                                 ->groupBy('date')
                                 ->get();
                 return $t;
@@ -97,7 +128,7 @@ class Api {
             else if($format == "d"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subDay())
-                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw("DATE_FORMAT(created_at, '%m-%d %hh') AS date")])
+                                ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d %Hh') AS date")])
                                 ->groupBy('date')
                                 ->get();
                 return $t;
@@ -105,22 +136,25 @@ class Api {
             else if($format == "w"){
                 $t = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subWeek())
-                                ->select([DB::raw('AVG(temperature) as temperature'), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
+                                ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
                                 ->groupBy('date')
                                 ->get();
                 return $t;
             }
-
         } else {
             return array('success' => 'false', 'error' => 'Station not found');
         }
     }
 
+    /**
+     * @return array
+     */
     public function getLastInformation(){
         $this->user = $this->user->find($this->app_id);
         if($this->user != null){
-            $information = $this->user->weathers
-                                     ->last();
+            $information = $this->user->weathers->last();
+            //dd($information->wind_direction);
+            $information->wind_direction = $this->getWindDirectionName($information->wind_direction);
             return $information;
         }
         else {
@@ -128,6 +162,10 @@ class Api {
         }
     }
 
+    /**
+     * @param $length
+     * @return string
+     */
     public function regenerateKey($length){
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -136,5 +174,43 @@ class Api {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    /**
+     * @param $direction
+     * @return string
+     */
+    public function getWindDirectionName($direction){
+        $direction_name = "";
+        switch($direction){
+            case 0:
+                $direction_name = "N";
+                break;
+            case 360:
+                $direction_name = "N";
+                break;
+            case 45:
+                $direction_name = "NE";
+                break;
+            case 90:
+                $direction_name = "E";
+                break;
+            case 135:
+                $direction_name = "SE";
+                break;
+            case 180:
+                $direction_name = "S";
+                break;
+            case 225:
+                $direction_name = "SW";
+                break;
+            case 270:
+                $direction_name = "W";
+                break;
+            case 315:
+                $direction_name = "NW";
+                break;
+        }
+        return $direction_name;
     }
 }
