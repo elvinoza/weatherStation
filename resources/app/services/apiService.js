@@ -13,6 +13,14 @@ stationsApp.service('apiService', function($http){
         return $http.get(baseURL + 'get/wind_speeds/' + id + '/' + format);
     };
 
+    this.getStationPressure = function(id, format){
+        return $http.get(baseURL + 'get/pressures/' + id + '/' + format);
+    };
+
+    this.getStationlightLevels = function(id, format){
+        return $http.get(baseURL + 'get/light_levels/' + id + '/' + format);
+    };
+
     this.getFirstStation = function(){
         return $http.get(baseURL + 'get/firstStation');
     };

@@ -76,13 +76,15 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
     $scope.tempType = "h";
     $scope.humType = "h";
     $scope.windSpeedType = "h";
+    $scope.pressureType = "h";
+    $scope.lightType = "h";
 
     $scope.getTemperatureChart = function(tempType){
         $scope.tempType = tempType;
         apiService.getStationTemperature($scope.stationId, tempType).success(function(data){
             $scope.tempLabels = [];
             $scope.tempData = [];
-            $scope.tempLabels = data.map(function(item){ return item.date;})
+            $scope.tempLabels = data.map(function(item){ return item.date;});
             $scope.tempSeries = ['Temperature'];
             $scope.tempData.push(data.map(function(item){ return item.temperature;}));
         });
@@ -93,7 +95,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         apiService.getStationHumidity($scope.stationId, humType).success(function(data){
             $scope.humLabels = [];
             $scope.humData = [];
-            $scope.humLabels = data.map(function(item){ return item.date;})
+            $scope.humLabels = data.map(function(item){ return item.date;});
             $scope.humSeries = ['Humidity'];
             $scope.humData.push(data.map(function(item){ return item.humidity;}));
         });
@@ -104,16 +106,40 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         apiService.getStationWindSpeed($scope.stationId, windSpeedType).success(function(data){
             $scope.windSpeedLabels = [];
             $scope.windSpeedData = [];
-            $scope.windSpeedLabels = data.map(function(item){ return item.date;})
+            $scope.windSpeedLabels = data.map(function(item){ return item.date;});
             $scope.windSpeedSeries = ['Wind speed'];
             $scope.windSpeedData.push(data.map(function(item){ return item.wind_speed;}));
         });
     };
 
+    $scope.getPressureChart = function(pressureType){
+        $scope.pressureType = pressureType;
+        apiService.getStationPressure($scope.stationId, pressureType).success(function(data){
+            $scope.pressureLabels = [];
+            $scope.pressureData = [];
+            $scope.pressureLabels = data.map(function(item){ return item.date;});
+            $scope.pressureSeries = ['Pressure'];
+            $scope.pressureData.push(data.map(function(item){ return item.pressure;}));
+        });
+    };
+
+
+    $scope.getLightChart = function(lightType){
+        $scope.lightType = lightType;
+        apiService.getStationlightLevels($scope.stationId, lightType).success(function(data){
+            $scope.lightLabels = [];
+            $scope.lightData = [];
+            $scope.lightLabels = data.map(function(item){ return item.date;});
+            $scope.lightSeries = ['Light level'];
+            $scope.lightData.push(data.map(function(item){ return item.light_level;}));
+        });
+    };
     //initial charts
     $scope.getTemperatureChart($scope.tempType);
     $scope.getHumidityChart($scope.humType);
     $scope.getWindSpeedChart($scope.windSpeedType);
+    $scope.getPressureChart($scope.pressureType);
+    $scope.getLightChart($scope.lightType);
 });
 
 stationsApp.controller("LiveController", function($scope, apiService){

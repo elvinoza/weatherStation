@@ -100,6 +100,10 @@ Route::group(array('prefix' => 'api/v1'), function(){
 
     Route::get('get/wind_speeds/{id}/{format}', 'ApiController@getStationWindSpeed');
 
+    Route::get('get/pressures/{id}/{format}', 'ApiController@getStationPressure');
+
+    Route::get('get/light_levels/{id}/{format}', 'ApiController@getStationLightLevels');
+
     Route::get('get/firstStation', 'ApiController@getFirstStation');
 
     Route::get('get/lastStationInformation/{id}', 'ApiController@getLastStationInformation');

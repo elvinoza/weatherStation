@@ -99,7 +99,6 @@ class ApiController extends Controller {
         return response()->json($temperatures);
     }
 
-
     /**
      * @param $id
      * @param $format
@@ -112,7 +111,6 @@ class ApiController extends Controller {
         return response()->json($humidities);
     }
 
-
     /**
      * @param $id
      * @param $format
@@ -122,6 +120,23 @@ class ApiController extends Controller {
         $api = new Api($id, null, $this->user);
         $speeds = $api->getStationDataByFormat($format, 'wind_speed');
         return response()->json($speeds);
+    }
+
+    /**
+     * @param $id
+     * @param $format
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationPressure($id, $format){
+        $api = new Api($id, null, $this->user);
+        $pressures = $api->getStationDataByFormat($format, 'pressure');
+        return response()->json($pressures);
+    }
+
+    public function getStationLightLevels($id, $format){
+        $api = new Api($id, null, $this->user);
+        $lightLevels = $api->getStationDataByFormat($format, 'light_level');
+        return response()->json($lightLevels);
     }
     /**
      * @return \Symfony\Component\HttpFoundation\Response
