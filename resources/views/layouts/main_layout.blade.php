@@ -15,7 +15,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><% gstationId %></a>
+                <a class="navbar-brand" href="index.html"><% selectedStationId %></a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -72,7 +72,7 @@
                         <a href="#/"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li ng-class="{ active: isActive('/charts/') }">
-                        <a href="#/charts/<% gstationId %>"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="#/charts/<% selectedStationId %>"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
                     <li ng-class="{ active: isActive('/tables') }">
                         <a href="#/tables"><i class="fa fa-fw fa-table"></i> Tables</a>

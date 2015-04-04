@@ -10,10 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Api;
 use App\User;
-use App\Weather;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Input;
-use Symfony\Component\HttpFoundation\Request;
 
 class ApiController extends Controller {
 

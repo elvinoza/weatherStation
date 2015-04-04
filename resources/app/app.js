@@ -17,7 +17,7 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
             controller: "TemperatureController",
             templateUrl: "partials/temperature.html"
         })
-        .when('/charts/:gstationId', {
+        .when('/charts/:selectedStationId', {
             controller: "ChartsController",
             templateUrl: "partials/charts.html"
         })
@@ -25,17 +25,24 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
         .otherwise({ redirectTo: "/" });
     }])
     .run(function($rootScope, apiService){
-        $rootScope.gstationId = "3RkTSJ";
+        $rootScope.selected = false;
+        $rootScope.selectedStationId = "3RkTSJ";
+        $rootScope.selectedStationName = "Kaunas";
+        $rootScope.station = {
+            id : "3RkTSJ",
+            station_name : "Kaunas"
+        };
 
-        apiService.getFirstStation().success(function(data){
-            gstationId = data.id;
-        });
 
-//        $rootScope.setStationId = function(id){
-//            $rootScope.gstationId = id;
-//        };
-
-        $rootScope.getStationId = function(){
-            return $rootScope.gstationId;
-        }
+//        apiService.getFirstStation().success(function(data){
+//            gstationId = data.id;
+//        });
+//
+////        $rootScope.setStationId = function(id){
+////            $rootScope.gstationId = id;
+////        };
+//
+//        $rootScope.getStationId = function(){
+//            return $rootScope.gstationId;
+//        }
     });

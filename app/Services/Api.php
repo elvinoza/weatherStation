@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\DB;
 
 class Api {
 
+    /** @var string */
     protected $app_id;
+    /** @var string */
     protected $app_key;
+    /** @var User */
     protected $user;
 
     /**
@@ -74,7 +77,7 @@ class Api {
             return $weathers = $this->user->weathers;
         }
         else {
-            return array('success' => 'false', 'error' => 'Station not found');
+            return array('success' => false, 'error' => 'Station not found');
         }
     }
 
@@ -97,7 +100,6 @@ class Api {
         } else {
             return array('success' => 'false', 'error' => 'Station not found');
         }
-
     }
 
     /**
@@ -110,39 +112,37 @@ class Api {
         $this->user = $this->user->find($this->app_id);
         if($this->user != null)
         {
+            $data = [];
             if($format == "h"){
-                $t = $this->user->weathers()
+                $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subHour())
                                 ->select([$option, DB::raw("DATE_FORMAT(created_at, '%H:%i') as date")])->get();
-                return $t;
             }
             else if($format == "m"){
-                $t = $this->user->weathers()
+                $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subMonth())
                                 ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
 
                                 ->groupBy('date')
                                 ->get();
-                return $t;
             }
             else if($format == "d"){
-                $t = $this->user->weathers()
+                $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subDay())
                                 ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d %Hh') AS date")])
                                 ->groupBy('date')
                                 ->get();
-                return $t;
             }
             else if($format == "w"){
-                $t = $this->user->weathers()
+                $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subWeek())
                                 ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
                                 ->groupBy('date')
                                 ->get();
-                return $t;
             }
+            return array('success' => true, 'data' => $data);
         } else {
-            return array('success' => 'false', 'error' => 'Station not found');
+            return array('success' => false, 'error' => 'Station not found');
         }
     }
 
@@ -152,13 +152,17 @@ class Api {
     public function getLastInformation(){
         $this->user = $this->user->find($this->app_id);
         if($this->user != null){
-            $information = $this->user->weathers->last();
-            //dd($information->wind_direction);
-            $information->wind_direction = $this->getWindDirectionName($information->wind_direction);
-            return $information;
+            if(count($this->user->weathers)){
+                $information = $this->user->weathers->last();
+                $information->wind_direction = $this->getWindDirectionName($information->wind_direction);
+                return array('success' => true, 'information' => $information);
+            }
+            else{
+                return array('success' => false, 'error' => "This station haven't information.");
+            }
         }
         else {
-            return array('success' => 'false', 'error' => 'Station not found');
+            return array('success' => false, 'error' => 'Station not found.');
         }
     }
 

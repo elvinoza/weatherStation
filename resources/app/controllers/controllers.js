@@ -3,15 +3,27 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
     $scope.stations = [];
     //$scope.stationId = $rootScope.gstationId;
     $scope.getStationId = function(){
-
-        apiService.getStationList().success(function(data){
-            $scope.stations = data;
-            $scope.stId = data[0];
-        });
+        if(!$rootScope.selected){
+            console.log("selected");
+            apiService.getStationList().success(function(data){
+                $scope.stations = data;
+                $scope.station = data[0];
+            });
+        }
+        else {
+            console.log("not selected");
+            apiService.getStationList().success(function(data){
+                $scope.stations = data;
+                $scope.station = $rootScope.station;
+            });
+        }
     };
 
-    $scope.setStationId = function(id){
-        $rootScope.gstationId = id;
+    $scope.setStationId = function(station){
+        $rootScope.selected = true;
+        $rootScope.selectedStationId = station.id;
+        $rootScope.selectedStationName = station.station_name;
+        $rootScope.station = station;
         $scope.getStationInformation();
     };
 
@@ -31,15 +43,20 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
     });
 
     $interval($scope.getStationInformation = function(){
-        apiService.getLastStationInformation($rootScope.gstationId).success(function(data){
-            $scope.temperature = data.temperature;
-            $scope.humidity = data.humidity;
-            $scope.light_lvl = data.light_lvl;
-            $scope.pressure = data.pressure;
-            $scope.wind_direction = data.wind_direction;
-            $scope.wind_speed = data.wind_speed;
-            $scope.rain = data.rain;
-
+        apiService.getLastStationInformation($rootScope.selectedStationId).success(function(data){
+            if(data.success){
+                $scope.has = true;
+                $scope.temperature = data.information.temperature;
+                $scope.humidity = data.information.humidity;
+                $scope.light_level = data.information.light_level;
+                $scope.pressure = data.information.pressure;
+                $scope.wind_direction = data.information.wind_direction;
+                $scope.wind_speed = data.information.wind_speed;
+                $scope.rain = data.information.rain;
+                $scope.time = data.information.created_at;
+            } else{
+                $scope.has = false;
+            }
         });
     }, 70000);
 
@@ -59,10 +76,6 @@ stationsApp.controller("PanelController", function(){
     }
 });
 
-stationsApp.controller("TemperatureController", function($scope, $rootScope, apiService){
-
-});
-
 stationsApp.controller("NavBarController", function($scope, $location){
 
     $scope.isActive = function(viewLocation){
@@ -70,23 +83,29 @@ stationsApp.controller("NavBarController", function($scope, $location){
     }
 });
 
-stationsApp.controller("ChartsController", function($scope, $routeParams, apiService){
-
-    $scope.stationId = $routeParams.gstationId;
-    $scope.tempType = "h";
-    $scope.humType = "h";
-    $scope.windSpeedType = "h";
-    $scope.pressureType = "h";
-    $scope.lightType = "h";
+stationsApp.controller("ChartsController", function($scope, $routeParams, $rootScope, apiService){
+    var initialChartType = "m";
+    $scope.stationId = $routeParams.selectedStationId;
+    $scope.tempType = initialChartType;
+    $scope.humType = initialChartType;
+    $scope.windSpeedType = initialChartType;
+    $scope.pressureType = initialChartType;
+    $scope.lightType = initialChartType;
 
     $scope.getTemperatureChart = function(tempType){
         $scope.tempType = tempType;
         apiService.getStationTemperature($scope.stationId, tempType).success(function(data){
             $scope.tempLabels = [];
             $scope.tempData = [];
-            $scope.tempLabels = data.map(function(item){ return item.date;});
-            $scope.tempSeries = ['Temperature'];
-            $scope.tempData.push(data.map(function(item){ return item.temperature;}));
+            $scope.tempSeries = [$rootScope.selectedStationName + ' temperature'];
+            $scope.tempLabels = data.data.map(function(item){ return item.date;});
+            $scope.tempData.push(data.data.map(function(item){ return item.temperature;}));
+            if(data.success){
+                $scope.hasTemperature = true;
+
+            } else {
+                $scope.hasTemperature = false;
+            }
         });
     };
 
@@ -95,9 +114,9 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         apiService.getStationHumidity($scope.stationId, humType).success(function(data){
             $scope.humLabels = [];
             $scope.humData = [];
-            $scope.humLabels = data.map(function(item){ return item.date;});
+            $scope.humLabels = data.data.map(function(item){ return item.date;});
             $scope.humSeries = ['Humidity'];
-            $scope.humData.push(data.map(function(item){ return item.humidity;}));
+            $scope.humData.push(data.data.map(function(item){ return item.humidity;}));
         });
     };
 
@@ -106,9 +125,9 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         apiService.getStationWindSpeed($scope.stationId, windSpeedType).success(function(data){
             $scope.windSpeedLabels = [];
             $scope.windSpeedData = [];
-            $scope.windSpeedLabels = data.map(function(item){ return item.date;});
+            $scope.windSpeedLabels = data.data.map(function(item){ return item.date;});
             $scope.windSpeedSeries = ['Wind speed'];
-            $scope.windSpeedData.push(data.map(function(item){ return item.wind_speed;}));
+            $scope.windSpeedData.push(data.data.map(function(item){ return item.wind_speed;}));
         });
     };
 
@@ -117,9 +136,9 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         apiService.getStationPressure($scope.stationId, pressureType).success(function(data){
             $scope.pressureLabels = [];
             $scope.pressureData = [];
-            $scope.pressureLabels = data.map(function(item){ return item.date;});
+            $scope.pressureLabels = data.data.map(function(item){ return item.date;});
             $scope.pressureSeries = ['Pressure'];
-            $scope.pressureData.push(data.map(function(item){ return item.pressure;}));
+            $scope.pressureData.push(data.data.map(function(item){ return item.pressure;}));
         });
     };
 
@@ -129,9 +148,9 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, apiSer
         apiService.getStationlightLevels($scope.stationId, lightType).success(function(data){
             $scope.lightLabels = [];
             $scope.lightData = [];
-            $scope.lightLabels = data.map(function(item){ return item.date;});
+            $scope.lightLabels = data.data.map(function(item){ return item.date;});
             $scope.lightSeries = ['Light level'];
-            $scope.lightData.push(data.map(function(item){ return item.light_level;}));
+            $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
         });
     };
     //initial charts

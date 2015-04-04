@@ -6,7 +6,6 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading" >
                             <h3 class="panel-title col-lg-8">Temperatures</h3>
-                            <% tempType %>
                             <div class="btn-group">
                                 <label class="btn btn-primary" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'h'">Hour</label>
                                 <label class="btn btn-primary" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'d'">Day</label>
@@ -19,11 +18,18 @@
                         </div>
                         <div class="panel-body">
                             <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-line-chart">
-                                    <canvas id="line" class="chart chart-line" data="tempData"
-                                            labels="tempLabels" legend="true" series="tempSeries"
-                                            click="onClick">
-                                    </canvas>
+                                <div ng-hide="tempData[0].length == 0 || !hasTemperature">
+                                    <div class="flot-chart-content" id="flot-line-chart">
+                                        <canvas id="line" class="chart chart-line" data="tempData"
+                                                labels="tempLabels" legend="true" series="tempSeries"
+                                                click="onClick">
+                                        </canvas>
+                                    </div>
+                                </div>
+                                <div class="text-center" ng-show="tempData[0].length == 0 || !hasTemperature">
+                                    <p>
+                                        This station hasn't any data of temperature
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -35,7 +41,6 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading" >
                             <h3 class="panel-title col-lg-8">Humidity</h3>
-                            <% humType %>
                             <div class="btn-group">
                                 <label class="btn btn-primary" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'h'">Hour</label>
                                 <label class="btn btn-primary" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'d'">Day</label>
@@ -64,7 +69,6 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading" >
                             <h3 class="panel-title col-lg-8">Wind Speed(km/h)</h3>
-                            <% windSpeedType %>
                             <div class="btn-group">
                                 <label class="btn btn-primary" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'h'">Hour</label>
                                 <label class="btn btn-primary" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'d'">Day</label>
@@ -93,7 +97,6 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading" >
                             <h3 class="panel-title col-lg-8">Pressure(Pa)</h3>
-                            <% pressureType %>
                             <div class="btn-group">
                                 <label class="btn btn-primary" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'h'">Hour</label>
                                 <label class="btn btn-primary" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'d'">Day</label>
@@ -122,7 +125,6 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading" >
                             <h3 class="panel-title col-lg-8">Light levels</h3>
-                            <% lightType %>
                             <div class="btn-group">
                                 <label class="btn btn-primary" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'h'">Hour</label>
                                 <label class="btn btn-primary" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'d'">Day</label>
