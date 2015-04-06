@@ -146,6 +146,31 @@ class Api {
         }
     }
 
+
+    /**
+     * @return array
+     */
+    public function getWindDirectionCounts(){
+        $this->user = $this->user->find($this->app_id);
+        if($this->user != null)
+        {
+            $dir = $this->user->weathers()
+                            ->where('created_at', '>=', Carbon::now()->subMonth())
+                            ->select([DB::raw("COUNT(*) as c_direction"), "wind_direction"])
+                            ->groupBy("wind_direction")
+                            ->get();
+            foreach($dir as $key => $item){
+                $dir[$key]['wind_direction'] = $this->getWindDirectionName($item['wind_direction']);
+            }
+
+            $result = $this->getDirectionsArray($dir);
+
+            return array('success' => true, 'data' => $result);
+        } else {
+            return array('success' => false, 'error' => 'Station not found');
+        }
+    }
+
     /**
      * @return array
      */
@@ -187,34 +212,52 @@ class Api {
     public function getWindDirectionName($direction){
         $direction_name = "";
         switch($direction){
-            case 0:
+            case $direction <= 22.5 || $direction >= 337.5:
                 $direction_name = "N";
                 break;
-            case 360:
-                $direction_name = "N";
-                break;
-            case 45:
+            case $direction > 22.5 && $direction <=  67.5:
                 $direction_name = "NE";
                 break;
-            case 90:
+            case $direction > 67.5 && $direction <= 112.5:
                 $direction_name = "E";
                 break;
-            case 135:
+            case $direction > 112.5 && $direction <= 157.5:
                 $direction_name = "SE";
                 break;
-            case 180:
+            case $direction > 157.5 && $direction <= 202.5:
                 $direction_name = "S";
                 break;
-            case 225:
+            case $direction > 202.5 && $direction <= 247.5:
                 $direction_name = "SW";
                 break;
-            case 270:
+            case $direction > 247.5 && $direction <= 292.5:
                 $direction_name = "W";
                 break;
-            case 315:
+            case $direction > 292.5 && $direction <= 337.5:
                 $direction_name = "NW";
                 break;
         }
         return $direction_name;
+    }
+
+    /**
+     * @param $directions
+     * @return array
+     */
+    public function getDirectionsArray($directions){
+        $grouped = [
+            "N" => 0,
+            "NE" => 0,
+            "E" => 0,
+            "SE" => 0,
+            "S" => 0,
+            "SW" => 0,
+            "W" => 0,
+            "NW" => 0
+        ];
+        foreach($directions as $direction){
+            $grouped[$direction['wind_direction']] += $direction['c_direction'];
+        }
+        return $grouped;
     }
 }

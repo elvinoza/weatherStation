@@ -1,6 +1,6 @@
 <div id="wrapper">
     <div id="page-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid" ng-show="exist">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary">
@@ -18,18 +18,11 @@
                         </div>
                         <div class="panel-body">
                             <div class="flot-chart">
-                                <div ng-hide="tempData[0].length == 0 || !hasTemperature">
-                                    <div class="flot-chart-content" id="flot-line-chart">
-                                        <canvas id="line" class="chart chart-line" data="tempData"
-                                                labels="tempLabels" legend="true" series="tempSeries"
-                                                click="onClick">
-                                        </canvas>
-                                    </div>
-                                </div>
-                                <div class="text-center" ng-show="tempData[0].length == 0 || !hasTemperature">
-                                    <p>
-                                        This station hasn't any data of temperature
-                                    </p>
+                                <div class="flot-chart-content" id="flot-line-chart">
+                                    <canvas id="line" class="chart chart-line" data="tempData"
+                                            labels="tempLabels" legend="true" series="tempSeries"
+                                            click="onClick">
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
@@ -147,6 +140,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div style="height: 100%" class="container-fluid" ng-show="!exist">
+            <div class="text-center">
+                This station hasn't any information
             </div>
         </div>
     </div>

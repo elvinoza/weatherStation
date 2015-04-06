@@ -33,7 +33,6 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
             station_name : "Kaunas"
         };
 
-
 //        apiService.getFirstStation().success(function(data){
 //            gstationId = data.id;
 //        });

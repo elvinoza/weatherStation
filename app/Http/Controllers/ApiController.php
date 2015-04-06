@@ -130,6 +130,11 @@ class ApiController extends Controller {
         return response()->json($pressures);
     }
 
+    /**
+     * @param $id
+     * @param $format
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function getStationLightLevels($id, $format){
         $api = new Api($id, null, $this->user);
         $lightLevels = $api->getStationDataByFormat($format, 'light_level');
@@ -150,5 +155,20 @@ class ApiController extends Controller {
         $api = new Api($id, null, $this->user);
         $information = $api->getLastInformation();
         return response()->json($information);
+    }
+
+    public function tryDir($dir){
+        $api = new Api("3RkTSJ", null, $this->user);
+        $api->getWindDirectionName($dir);
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationWindDirection($id){
+        $api = new Api($id, null, $this->user);
+        $data = $api->getWindDirectionCounts();
+        return response()->json($data);
     }
 }
