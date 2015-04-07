@@ -90,6 +90,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.windSpeedType = initialChartType;
     $scope.pressureType = initialChartType;
     $scope.lightType = initialChartType;
+    $scope.directionType = initialChartType;
 
 //    $scope.hasData = function(){
 //        apiService.getLastStationInformation($scope.stationId).success(function(data){
@@ -156,6 +157,18 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
         });
     };
+
+    $scope.getWindDirectionChart = function(directionType){
+        $scope.directionType = directionType;
+        apiService.getStationWindDirections($scope.stationId, directionType).success(function(data){
+            $scope.directionLabels = [];
+            $scope.directionData = [];
+            $scope.directionLabels = Object.keys(data.data);
+            $scope.directionSeries = [$rootScope.selectedStationName + ' light level'];
+            $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
+            console.log($scope.directionData);
+        })
+    }
     //initial charts
     //$scope.hasData();
     //if($scope.exist){
@@ -164,6 +177,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.getWindSpeedChart($scope.windSpeedType);
     $scope.getPressureChart($scope.pressureType);
     $scope.getLightChart($scope.lightType);
+    $scope.getWindDirectionChart($scope.directionType);
     //}
 });
 

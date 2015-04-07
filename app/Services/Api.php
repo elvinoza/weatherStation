@@ -146,16 +146,25 @@ class Api {
         }
     }
 
-
     /**
+     * @param $format
      * @return array
      */
-    public function getWindDirectionCounts(){
+    public function getWindDirectionCounts($format){
         $this->user = $this->user->find($this->app_id);
         if($this->user != null)
         {
+            if($format == "h"){
+                $date = Carbon::now()->subHour();
+            } else if($format == "d"){
+                $date = Carbon::now()->subDay();
+            } else if($format == "w"){
+                $date = Carbon::now()->subWeek();
+            } else {
+                $date = Carbon::now()->subMonth();
+            }
             $dir = $this->user->weathers()
-                            ->where('created_at', '>=', Carbon::now()->subMonth())
+                            ->where('created_at', '>=', $date)
                             ->select([DB::raw("COUNT(*) as c_direction"), "wind_direction"])
                             ->groupBy("wind_direction")
                             ->get();
@@ -163,7 +172,7 @@ class Api {
                 $dir[$key]['wind_direction'] = $this->getWindDirectionName($item['wind_direction']);
             }
 
-            $result = $this->getDirectionsArray($dir);
+            $result = $this->getDirectionsGroupedArray($dir);
 
             return array('success' => true, 'data' => $result);
         } else {
@@ -244,7 +253,7 @@ class Api {
      * @param $directions
      * @return array
      */
-    public function getDirectionsArray($directions){
+    public function getDirectionsGroupedArray($directions){
         $grouped = [
             "N" => 0,
             "NE" => 0,

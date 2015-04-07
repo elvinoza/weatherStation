@@ -42979,7 +42979,6 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
             station_name : "Kaunas"
         };
 
-
 //        apiService.getFirstStation().success(function(data){
 //            gstationId = data.id;
 //        });
@@ -42998,14 +42997,12 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
     //$scope.stationId = $rootScope.gstationId;
     $scope.getStationId = function(){
         if(!$rootScope.selected){
-            console.log("selected");
             apiService.getStationList().success(function(data){
                 $scope.stations = data;
                 $scope.station = data[0];
             });
         }
         else {
-            console.log("not selected");
             apiService.getStationList().success(function(data){
                 $scope.stations = data;
                 $scope.station = $rootScope.station;
@@ -43086,17 +43083,16 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.windSpeedType = initialChartType;
     $scope.pressureType = initialChartType;
     $scope.lightType = initialChartType;
+    $scope.directionType = initialChartType;
 
-    $scope.hasData = function(){
-        apiService.getLastStationInformation($scope.stationId).success(function(data){
-           if(data.success)
-               $scope.exist = true;
-           else
-               $scope.exist = false;
-
-        });
-
-    };
+//    $scope.hasData = function(){
+//        apiService.getLastStationInformation($scope.stationId).success(function(data){
+//           if(data.success)
+//               $scope.exist = true;
+//           else
+//               $scope.exist = false;
+//        });
+//    };
 
     $scope.getTemperatureChart = function(tempType){
         console.log('asd');
@@ -43154,15 +43150,28 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
         });
     };
-    //initial charts
-    $scope.hasData();
-    if($scope.exist){
-        $scope.getTemperatureChart($scope.tempType);
-        $scope.getHumidityChart($scope.humType);
-        $scope.getWindSpeedChart($scope.windSpeedType);
-        $scope.getPressureChart($scope.pressureType);
-        $scope.getLightChart($scope.lightType);
+
+    $scope.getWindDirectionChart = function(directionType){
+        $scope.directionType = directionType;
+        apiService.getStationWindDirections($scope.stationId, directionType).success(function(data){
+            $scope.directionLabels = [];
+            $scope.directionData = [];
+            $scope.directionLabels = Object.keys(data.data);
+            $scope.directionSeries = [$rootScope.selectedStationName + ' light level'];
+            $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
+            console.log($scope.directionData);
+        })
     }
+    //initial charts
+    //$scope.hasData();
+    //if($scope.exist){
+    $scope.getTemperatureChart($scope.tempType);
+    $scope.getHumidityChart($scope.humType);
+    $scope.getWindSpeedChart($scope.windSpeedType);
+    $scope.getPressureChart($scope.pressureType);
+    $scope.getLightChart($scope.lightType)
+    $scope.getWindDirectionChart($scope.directionType);
+    //}
 });
 
 stationsApp.controller("LiveController", function($scope, apiService){
@@ -43194,6 +43203,10 @@ stationsApp.service('apiService', function($http){
         return $http.get(baseURL + 'get/light_levels/' + id + '/' + format);
     };
 
+    this.getStationWindDirections = function(id, format){
+        return $http.get(baseURL + 'get/wind_direction/' + id + '/' + format);
+    }
+
     this.getFirstStation = function(){
         return $http.get(baseURL + 'get/firstStation');
     };
@@ -43203,7 +43216,6 @@ stationsApp.service('apiService', function($http){
     };
 
     this.getLastStationInformation = function(id){
-        console.log(id);
         return $http.get(baseURL + 'get/lastStationInformation/' + id);
     };
 });

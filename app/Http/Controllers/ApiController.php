@@ -164,11 +164,12 @@ class ApiController extends Controller {
 
     /**
      * @param $id
+     * @param $format
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getStationWindDirection($id){
+    public function getStationWindDirection($id, $format){
         $api = new Api($id, null, $this->user);
-        $data = $api->getWindDirectionCounts();
+        $data = $api->getWindDirectionCounts($format);
         return response()->json($data);
     }
 }

@@ -21,6 +21,10 @@ stationsApp.service('apiService', function($http){
         return $http.get(baseURL + 'get/light_levels/' + id + '/' + format);
     };
 
+    this.getStationWindDirections = function(id, format){
+        return $http.get(baseURL + 'get/wind_direction/' + id + '/' + format);
+    }
+
     this.getFirstStation = function(){
         return $http.get(baseURL + 'get/firstStation');
     };
