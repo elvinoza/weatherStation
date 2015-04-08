@@ -38,6 +38,7 @@ gulp.task('scripts', function(){
             'resources/lib/angular-chart.js/angular-chart.js',
             'resources/lib/js/ui-bootstrap-tpls-0.12.1.min.js',
             'resources/lib/ngprogress/build/ngProgress.js',
+            'resources/lib/ng-table/ng-table.js',
             'resources/app/app.js',
             'resources/app/controllers/controllers.js',
             'resources/app/services/apiService.js'
@@ -67,6 +68,7 @@ gulp.task('default', function() {
             'resources/lib/angular-chart.js/angular-chart.js',
             'resources/lib/js/ui-bootstrap-tpls-0.12.1.min.js',
             'resources/lib/ngprogress/build/ngProgress.js',
+            'resources/lib/ng-table/ng-table.js',
             'resources/app/app.js',
             'resources/app/controllers/controllers.js',
             'resources/app/services/apiService.js'

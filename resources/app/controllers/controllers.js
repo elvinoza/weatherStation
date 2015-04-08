@@ -181,6 +181,38 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     //}
 });
 
+stationsApp.controller("TablesController", function($scope, $routeParams, apiService, $filter, ngTableParams){
+    $scope.stationId = $routeParams.selectedStationId;
+    $scope.loadAllDataForMainTable = function(){
+
+        apiService.getAllStationData($scope.stationId).success(function(data){
+            var information = data;
+            $scope.tableParams = new ngTableParams({
+                page: 1,
+                count: 10,
+                filter: {
+                    name: ''
+                }
+            },{
+                total: information.length,
+                getData: function($defer, params) {
+                    // use build-in angular filter
+                    var orderedData = params.filter() ?
+                        $filter('filter')(information, params.filter()) :
+                        information;
+
+                    $scope.weathers = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
+
+                    params.total(orderedData.length); // set total for recalc pagination
+                    $defer.resolve($scope.weathers);
+                }
+                }
+            )
+        });
+    };
+    $scope.loadAllDataForMainTable();
+});
+
 stationsApp.controller("LiveController", function($scope, apiService){
 
     $scope.getLiveData = function(){

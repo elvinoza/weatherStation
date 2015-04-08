@@ -36,4 +36,8 @@ stationsApp.service('apiService', function($http){
     this.getLastStationInformation = function(id){
         return $http.get(baseURL + 'get/lastStationInformation/' + id);
     };
+
+    this.getAllStationData = function(id){
+        return $http.get(baseURL + 'get/allStationData/' + id);
+    }
 });

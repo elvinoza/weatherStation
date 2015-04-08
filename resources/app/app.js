@@ -2,7 +2,7 @@
  * Created by elvinas on 3/26/15.
  */
 
-var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstrap', 'ngProgress'], function($interpolateProvider){
+var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstrap', 'ngProgress','ngTable'], function($interpolateProvider){
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 })
@@ -20,6 +20,10 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
         .when('/charts/:selectedStationId', {
             controller: "ChartsController",
             templateUrl: "partials/charts.html"
+        })
+        .when('/tables/:selectedStationId', {
+            controller: "TablesController",
+            templateUrl: "partials/tables.html"
         })
 
         .otherwise({ redirectTo: "/" });

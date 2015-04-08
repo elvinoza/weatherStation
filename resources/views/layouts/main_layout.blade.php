@@ -2,7 +2,7 @@
 <head>
     {!! HTML::style('css/style.css') !!}
 </head>
-<body>
+<body class="body">
     @section('nav-bar')
 
         <!-- Navigation -->
@@ -30,8 +30,8 @@
                     <li ng-class="{ active: isActive('/charts/') }">
                         <a href="#/charts/<% selectedStationId %>"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
                     </li>
-                    <li ng-class="{ active: isActive('/tables') }">
-                        <a href="#/tables"><i class="fa fa-fw fa-table"></i> Tables</a>
+                    <li ng-class="{ active: isActive('/tables/') }">
+                        <a href="#/tables/<% selectedStationId %>"><i class="fa fa-fw fa-table"></i> Tables</a>
                     </li>
                 </ul>
             </div>

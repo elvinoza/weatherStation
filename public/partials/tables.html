@@ -1,0 +1,38 @@
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table ng-table="tableParams" show-filter="true" class="table">
+                        <tr ng-repeat="weather in $data" class="text-center sortable">
+                            <td data-title="'Temperature'">
+                                <% weather.temperature %>
+                            </td>
+                            <td data-title="'Humidity'">
+                                <% weather.humidity %>
+                            </td>
+                            <td data-title="'Light level'">
+                                <% weather.light_level %>
+                            </td>
+                            <td data-title="'Pressure'">
+                                <% weather.pressure %>
+                            </td>
+                            <td data-title="'Wind direction(degrees)'">
+                                <% weather.wind_direction %>
+                            </td>
+                            <td data-title="'Wind Speed'">
+                                <% weather.wind_speed %>
+                            </td>
+                            <td data-title="'Rain'">
+                                <% weather.rain %>
+                            </td>
+                            <td data-title="'Date'" filter="{ 'created_at': 'text' }">
+                                <% weather.created_at %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

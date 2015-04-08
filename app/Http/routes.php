@@ -11,7 +11,10 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', array(
+    'as' => 'home-page',
+    'uses' => 'WelcomeController@index'
+));
 
 Route::get('home', 'HomeController@index');
 
@@ -89,8 +92,7 @@ Route::group(array('prefix' => 'api/v1'), function(){
 
     Route::get('get/stations-list', 'ApiController@getStations');
     //api/v1/get?id=123456&type=all
-    Route::get('/get/{id}/all', 'ApiController@getAllData');
-
+    Route::get('/get/allStationData/{id}', 'ApiController@getAllData');
     //groupby : all, day, month, hour
     Route::get('get/{id}/byDate/{startDate}/{endDate}/{groupBy?}', 'ApiController@getByDate');
 
