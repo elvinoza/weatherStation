@@ -1,28 +1,45 @@
 @extends('layouts.developer_layout')
 
+@section('hello')
+@stop
+
 @section('content')
-    <div class="col-md-8 col-md-offset-2 form-content">
-        <h3 class="heading">Login</h3>
+    <section id="contact" class="home-section nopadd-bot color-dark bg-gray text-center">
+        <div class="container marginbot-50">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="animatedParent">
+                        <div class="section-heading text-center">
+                            <h2 class="h-bold animated bounceInDown">Sign in</h2>
+                            <div class="divider-header"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         @foreach($errors->all() as $error)
         <p class="alert alert-danger">{!!$error!!}</p>
         @endforeach
-        {!!Form::open(['route'=>'developer.login','class'=>'form form-horizontal','style'=>'margin-top:50px'])!!}
-        <div class="form-group">
-            {!! Form::label('email','Email:',['class'=>'col-sm-3 control-label']) !!}
-            <div class="col-sm-8">
-                {!! Form::text('email',Input::old('email'),['class'=>'form-control']) !!}
+        <div class="container">
+            <div class="row marginbot-80">
+                <div class="col-md-8 col-md-offset-2">
+                    {!!Form::open(['route'=>'developer.login','id'=>'contact-form'])!!}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                {!! Form::text('email',Input::old('email'),['class'=>'form-control input-lg', 'placeholder' => 'Email', 'required' => 'required']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::password('password',['class'=>'form-control input-lg', 'placeholder' => 'Password', 'required' => 'required']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        {!!Form::submit('Sign in',['class'=>'btn btn-skin btn-lg btn-block', 'id' => 'btnContactUs'])!!}
+                    </div>
+                    {!!Form::close()!!}
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            {!! Form::label('password','Password:',['class'=>'col-sm-3 control-label']) !!}
-            <div class="col-sm-8">
-                {!! Form::password('password',['class'=>'form-control']) !!}
-            </div>
-        </div>
-        <div class="text-center">
-            {!!Form::submit('Sign in',['class'=>'btn btn-default'])!!}
-        </div>
-        {!!Form::close()!!}
-    </div>
-
+    </section>
 @stop

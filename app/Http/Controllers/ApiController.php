@@ -60,7 +60,6 @@ class ApiController extends Controller {
         return response()->json($weathers);
     }
 
-
     /**
      * @param $id
      * @param $startDate
@@ -171,5 +170,15 @@ class ApiController extends Controller {
         $api = new Api($id, null, $this->user);
         $data = $api->getWindDirectionCounts($format);
         return response()->json($data);
+    }
+
+    public function checkStationExist($id){
+        $api = new Api($id, null,$this->user);
+        $u = $this->user->find($id);
+        if($u != null){
+            return response()->json(array('exist'=> true));
+        } else {
+            return response()->json(array('exist'=> false));
+        }
     }
 }

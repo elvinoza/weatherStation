@@ -47,6 +47,35 @@ gulp.task('scripts', function(){
         .pipe(gulp.dest('public/js'));
 });
 
+gulp.task('developer', function(){
+    gulp.src(['resources/lib/jquery/jquery.js',
+            'resources/lib/bootstrap.min.js',
+
+            'resources/lib/template/js/jquery.sticky.js',
+            'resources/lib/template/js/jquery.easing.min.js',
+            'resources/lib/template/js/jquery.scrollTo.js',
+            'resources/lib/template/js/jquery.appear.js',
+            'resources/lib/template/js/stellar.js',
+
+            'resources/lib/template/js/nivo-lightbox.min.js',
+            'resources/lib/template/js/custom.js',
+            'resources/lib/template/js/css3-animate-it.js'
+
+        ])
+        .pipe(concat('developer-all.js'))
+        .pipe(gulp.dest('public/js'));
+
+    gulp.src('resources/developer-style.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('public/css'));
+
+    gulp.src([
+            'resources/lib/bootstrap-sass/assets/fonts/bootstrap/*',
+            'resources/lib/template/font-awesome/fonts/*'
+        ])
+        .pipe(gulp.dest('public/developer-fonts'));
+});
+
 gulp.task('default', function() {
     gulp.src(['resources/lib/jquery/jquery.js',
             'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js',

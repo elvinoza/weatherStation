@@ -113,4 +113,6 @@ Route::group(array('prefix' => 'api/v1'), function(){
     Route::get('get/wind_direction/{id}/{format}', 'ApiController@getStationWindDirection');
 
     Route::get('get/lastStationInformation/{id}', 'ApiController@getLastStationInformation');
+
+    Route::get('app/checkStation/{id}', 'ApiController@checkStationExist');
 });
