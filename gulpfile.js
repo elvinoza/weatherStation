@@ -50,17 +50,14 @@ gulp.task('scripts', function(){
 gulp.task('developer', function(){
     gulp.src(['resources/lib/jquery/jquery.js',
             'resources/lib/bootstrap.min.js',
-
             'resources/lib/template/js/jquery.sticky.js',
             'resources/lib/template/js/jquery.easing.min.js',
             'resources/lib/template/js/jquery.scrollTo.js',
             'resources/lib/template/js/jquery.appear.js',
             'resources/lib/template/js/stellar.js',
-
             'resources/lib/template/js/nivo-lightbox.min.js',
             'resources/lib/template/js/custom.js',
             'resources/lib/template/js/css3-animate-it.js'
-
         ])
         .pipe(concat('developer-all.js'))
         .pipe(gulp.dest('public/js'));
@@ -114,6 +111,12 @@ gulp.task('default', function() {
             'resources/lib/sb-admin/font-awesome/fonts/*'
         ])
         .pipe(gulp.dest('public/fonts'));
+});
+
+gulp.task('styles', function(){
+    gulp.src('resources/style.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('watch', function() {

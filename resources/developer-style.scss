@@ -454,12 +454,14 @@ blockquote strong {
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li.active {
   outline: 0;
+  color: #3dc9b3;
   background-color: rgba(255,255,255,.2);
 }
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus,
 .navbar-custom .nav li.active {
   outline: 0;
+  color: #3dc9b3;
   background-color: rgba(255,255,255,.2);
 }
 
@@ -2943,5 +2945,9 @@ footer a.totop:hover {
 .btn-skin {
   color: #fff;
   background-color: #3dc9b3;
+  border-color: #3dc9b3;
+}
+
+.panel{
   border-color: #3dc9b3;
 }

@@ -1,5 +1,5 @@
 stationsApp.controller('HomeController', function ($scope, $rootScope, apiService, $interval, ngProgress) {
-    ngProgress.height('3px');
+    ngProgress.height('4.5px');
     $scope.stations = [];
     //$scope.stationId = $rootScope.gstationId;
     $scope.getStationId = function(){
@@ -200,6 +200,9 @@ stationsApp.controller("TablesController", function($scope, $routeParams, apiSer
                     var orderedData = params.filter() ?
                         $filter('filter')(information, params.filter()) :
                         information;
+
+                    orderedData = params.sorting() ? $filter('orderBy')(information, params.orderBy()):information;
+
 
                     $scope.weathers = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 

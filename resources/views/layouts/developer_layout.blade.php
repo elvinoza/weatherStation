@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="site-logo">
-                        <a href="index.html" class="brand">Meteo Customers</a>
+                        <a href="{{ route('developer.index') }}" class="brand">Meteo Customers</a>
                     </div>
                 </div>
                 <div class="col-md-10">
