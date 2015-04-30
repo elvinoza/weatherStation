@@ -83,6 +83,8 @@ stationsApp.controller("NavBarController", function($scope, $location){
 
 stationsApp.controller("ChartsController", function($scope, $routeParams, $rootScope, apiService){
     var initialChartType = "m";
+    $scope.loading = true;
+    var k = 0;
     $scope.stationId = $routeParams.selectedStationId;
     $scope.exist = false;
     $scope.tempType = initialChartType;
@@ -102,7 +104,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
 //    };
 
     $scope.getTemperatureChart = function(tempType){
-        console.log('asd');
+
         $scope.tempType = tempType;
         apiService.getStationTemperature($scope.stationId, tempType).success(function(data){
             $scope.tempLabels = [];
@@ -110,6 +112,8 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.tempSeries = [$rootScope.selectedStationName + ' temperature'];
             $scope.tempLabels = data.data.map(function(item){ return item.date;});
             $scope.tempData.push(data.data.map(function(item){ return item.temperature;}));
+            k++;
+            $scope.checkLoading();
         });
     };
 
@@ -121,6 +125,8 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.humLabels = data.data.map(function(item){ return item.date;});
             $scope.humSeries = [$rootScope.selectedStationName + ' humidity'];
             $scope.humData.push(data.data.map(function(item){ return item.humidity;}));
+            k++;
+            $scope.checkLoading();
         });
     };
 
@@ -132,6 +138,8 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.windSpeedLabels = data.data.map(function(item){ return item.date;});
             $scope.windSpeedSeries = [$rootScope.selectedStationName + ' wind speed'];
             $scope.windSpeedData.push(data.data.map(function(item){ return item.wind_speed;}));
+            k++;
+            $scope.checkLoading();
         });
     };
 
@@ -143,6 +151,8 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.pressureLabels = data.data.map(function(item){ return item.date;});
             $scope.pressureSeries = [$rootScope.selectedStationName + ' pressure'];
             $scope.pressureData.push(data.data.map(function(item){ return item.pressure;}));
+            k++;
+            $scope.checkLoading();
         });
     };
 
@@ -155,6 +165,8 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.lightLabels = data.data.map(function(item){ return item.date;});
             $scope.lightSeries = [$rootScope.selectedStationName + ' light level'];
             $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
+            k++;
+            $scope.checkLoading();
         });
     };
 
@@ -166,19 +178,27 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.directionLabels = Object.keys(data.data);
             $scope.directionSeries = [$rootScope.selectedStationName + ' light level'];
             $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
-            console.log($scope.directionData);
+            k++;
+            $scope.checkLoading();
         })
-    }
-    //initial charts
-    //$scope.hasData();
-    //if($scope.exist){
-    $scope.getTemperatureChart($scope.tempType);
-    $scope.getHumidityChart($scope.humType);
-    $scope.getWindSpeedChart($scope.windSpeedType);
-    $scope.getPressureChart($scope.pressureType);
-    $scope.getLightChart($scope.lightType);
-    $scope.getWindDirectionChart($scope.directionType);
-    //}
+    };
+
+    $scope.checkLoading = function(){
+        if(k == 6) $scope.loading = false;
+    };
+
+    $scope.loadCharts = function(){
+        $scope.loading = true;
+        k = 0;
+        $scope.getTemperatureChart($scope.tempType);
+        $scope.getHumidityChart($scope.humType);
+        $scope.getWindSpeedChart($scope.windSpeedType);
+        $scope.getPressureChart($scope.pressureType);
+        $scope.getLightChart($scope.lightType);
+        $scope.getWindDirectionChart($scope.directionType);
+        console.log($scope.pressureData);
+    };
+    $scope.loadCharts();
 });
 
 stationsApp.controller("TablesController", function($scope, $routeParams, apiService, $filter, ngTableParams){

@@ -1,5 +1,5 @@
 <div class="container">
-<section class="home-section color-dark bg-gray" style="padding-top: 50px">
+<section class="home-section color-dark bg-gray" style="padding-top: 50px" ng-if="loading === false">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
@@ -18,7 +18,7 @@
                 <div class="panel-body">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-line-chart">
-                            <canvas id="line" class="chart chart-line" data="tempData"
+                            <canvas id="line1" class="chart chart-line" data="tempData"
                                     labels="tempLabels" legend="true" series="tempSeries"
                                     click="onClick">
                             </canvas>
@@ -74,7 +74,7 @@
                 <div class="panel-body">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-line-chart">
-                            <canvas id="line" class="chart chart-line" data="windSpeedData"
+                            <canvas id="line4" class="chart chart-line" data="windSpeedData"
                                     labels="windSpeedLabels" legend="true" series="windSpeedSeries"
                                     click="onClick">
                             </canvas>
@@ -168,7 +168,9 @@
             </div>
         </div>
     </div>
-
+</section>
+<section class="home-section color-dark bg-gray" style="padding-top: 50px; height: 100%;" ng-if="loading === true">
+    <img src="img/preloader.GIF" width="68" class="center-block" alt="Location" />
 </section>
 </div>
 
