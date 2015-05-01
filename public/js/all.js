@@ -43757,39 +43757,28 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
         $rootScope.selected = false;
         $rootScope.selectedStationId = "3RkTSJ";
         $rootScope.selectedStationName = "Kaunas";
+        $rootScope.stations = [];
         $rootScope.station = {
             id : "3RkTSJ",
             station_name : "Kaunas"
         };
 
-//        apiService.getFirstStation().success(function(data){
-//            gstationId = data.id;
-//        });
-//
-////        $rootScope.setStationId = function(id){
-////            $rootScope.gstationId = id;
-////        };
-//
-//        $rootScope.getStationId = function(){
-//            return $rootScope.gstationId;
-//        }
+        apiService.getStationList().success(function(data){
+            $rootScope.stations = data;
+        });
+        //wait async task
+        //while(!flag){};
     });
 stationsApp.controller('HomeController', function ($scope, $rootScope, apiService, $interval, ngProgress) {
     ngProgress.height('4.5px');
-    $scope.stations = [];
+    $scope.stations = $rootScope.stations;
     //$scope.stationId = $rootScope.gstationId;
     $scope.getStationId = function(){
         if(!$rootScope.selected){
-            apiService.getStationList().success(function(data){
-                $scope.stations = data;
-                $scope.station = data[0];
-            });
+            $scope.station = $rootScope.stations[0];
         }
         else {
-            apiService.getStationList().success(function(data){
-                $scope.stations = data;
-                $scope.station = $rootScope.station;
-            });
+            $scope.station = $rootScope.station;
         }
     };
 
@@ -43883,7 +43872,6 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
 
         $scope.tempType = tempType;
         apiService.getStationTemperature($scope.stationId, tempType).success(function(data){
-            console.log('1');
             $scope.tempLabels = [];
             $scope.tempData = [];
             $scope.tempSeries = [$rootScope.selectedStationName + ' temperature'];
@@ -43897,7 +43885,6 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.getHumidityChart = function(humType){
         $scope.humType = humType;
         apiService.getStationHumidity($scope.stationId, humType).success(function(data){
-            console.log('2');
             $scope.humLabels = [];
             $scope.humData = [];
             $scope.humLabels = data.data.map(function(item){ return item.date;});
@@ -43911,7 +43898,6 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.getWindSpeedChart = function(windSpeedType){
         $scope.windSpeedType = windSpeedType;
         apiService.getStationWindSpeed($scope.stationId, windSpeedType).success(function(data){
-            console.log('3');
             $scope.windSpeedLabels = [];
             $scope.windSpeedData = [];
             $scope.windSpeedLabels = data.data.map(function(item){ return item.date;});
@@ -43925,7 +43911,6 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.getPressureChart = function(pressureType){
         $scope.pressureType = pressureType;
         apiService.getStationPressure($scope.stationId, pressureType).success(function(data){
-            console.log('4');
             $scope.pressureLabels = [];
             $scope.pressureData = [];
             $scope.pressureLabels = data.data.map(function(item){ return item.date;});
@@ -43940,7 +43925,6 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.getLightChart = function(lightType){
         $scope.lightType = lightType;
         apiService.getStationlightLevels($scope.stationId, lightType).success(function(data){
-            console.log('5');
             $scope.lightLabels = [];
             $scope.lightData = [];
             $scope.lightLabels = data.data.map(function(item){ return item.date;});
@@ -43954,7 +43938,6 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.getWindDirectionChart = function(directionType){
         $scope.directionType = directionType;
         apiService.getStationWindDirections($scope.stationId, directionType).success(function(data){
-            console.log('6');
             $scope.directionLabels = [];
             $scope.directionData = [];
             $scope.directionLabels = Object.keys(data.data);
@@ -43966,17 +43949,15 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     };
 
     $scope.checkLoading = function(){
-        if(k == 6) $scope.loading = false;
+        if(k == 6){
+            $scope.loading = false;
+            if($scope.tempData[0].length > 0){
+                $scope.exist = true;
+            }
+            console.log($scope.exist);
+        }
     };
 
-    $scope.$on('create', function () {
-        $scope.loading = false;
-        console.log("asd");
-        console.log($scope.loading);
-    });
-    //initial charts
-    //$scope.hasData();
-    //if($scope.exist){
     $scope.loadCharts = function(){
         $scope.loading = true;
         k = 0;

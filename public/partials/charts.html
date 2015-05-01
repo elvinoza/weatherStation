@@ -1,5 +1,5 @@
 <div class="container">
-<section class="home-section color-dark bg-gray" style="padding-top: 50px" ng-if="loading === false">
+<section class="home-section color-dark bg-gray" style="padding-top: 50px" ng-if="loading === false && exist">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
@@ -171,6 +171,13 @@
 </section>
 <section class="home-section color-dark bg-gray" style="padding-top: 50px; height: 100%;" ng-if="loading === true">
     <img src="img/preloader.GIF" width="68" class="center-block" alt="Location" />
+</section>
+<section class="home-section color-dark bg-gray" style="padding-top: 50px; height: 100%;" ng-if="loading === false && exist === false">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-4" style="color: #3dc9b3; font-size: 30px">
+            Sorry, this station has no information!
+        </div>
+    </div>
 </section>
 </div>
 

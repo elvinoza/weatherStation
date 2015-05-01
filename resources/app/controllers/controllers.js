@@ -1,19 +1,13 @@
 stationsApp.controller('HomeController', function ($scope, $rootScope, apiService, $interval, ngProgress) {
     ngProgress.height('4.5px');
-    $scope.stations = [];
+    $scope.stations = $rootScope.stations;
     //$scope.stationId = $rootScope.gstationId;
     $scope.getStationId = function(){
         if(!$rootScope.selected){
-            apiService.getStationList().success(function(data){
-                $scope.stations = data;
-                $scope.station = data[0];
-            });
+            $scope.station = $rootScope.stations[0];
         }
         else {
-            apiService.getStationList().success(function(data){
-                $scope.stations = data;
-                $scope.station = $rootScope.station;
-            });
+            $scope.station = $rootScope.station;
         }
     };
 
@@ -184,7 +178,13 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     };
 
     $scope.checkLoading = function(){
-        if(k == 6) $scope.loading = false;
+        if(k == 6){
+            $scope.loading = false;
+            if($scope.tempData[0].length > 0){
+                $scope.exist = true;
+            }
+            console.log($scope.exist);
+        }
     };
 
     $scope.loadCharts = function(){

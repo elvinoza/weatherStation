@@ -32,20 +32,15 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
         $rootScope.selected = false;
         $rootScope.selectedStationId = "3RkTSJ";
         $rootScope.selectedStationName = "Kaunas";
+        $rootScope.stations = [];
         $rootScope.station = {
             id : "3RkTSJ",
             station_name : "Kaunas"
         };
 
-//        apiService.getFirstStation().success(function(data){
-//            gstationId = data.id;
-//        });
-//
-////        $rootScope.setStationId = function(id){
-////            $rootScope.gstationId = id;
-////        };
-//
-//        $rootScope.getStationId = function(){
-//            return $rootScope.gstationId;
-//        }
+        apiService.getStationList().success(function(data){
+            $rootScope.stations = data;
+        });
+        //wait async task
+        //while(!flag){};
     });
