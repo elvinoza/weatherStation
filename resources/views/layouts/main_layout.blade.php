@@ -65,6 +65,7 @@
     @section('scripts')
         <script src="../../../js/all.js"></script>
         <script src="../../../js/developer-all.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
     @show
 </body>
 </html>

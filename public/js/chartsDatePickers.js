@@ -1,0 +1,4 @@
+$(function(){
+    $('.input-daterange').datepicker({
+    });
+});

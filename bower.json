@@ -12,7 +12,9 @@
         "Chart.js": "1.0.1",
         "angular-chart.js": "0.7.0",
         "ngprogress": "1.0.7",
-        "ng-table": "0.3.x"
+        "ng-table": "0.3.x",
+        ""
+        "angular-datepicker": "latest"
     },
     "exportsOverride": {}
 }

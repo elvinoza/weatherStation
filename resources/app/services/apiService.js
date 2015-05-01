@@ -25,6 +25,10 @@ stationsApp.service('apiService', function($http){
         return $http.get(baseURL + 'get/wind_direction/' + id + '/' + format);
     }
 
+    this.getStationRain = function(id, format){
+        return $http.get(baseURL + 'get/rain/' + id + '/' + format);
+    }
+
     this.getFirstStation = function(){
         return $http.get(baseURL + 'get/firstStation');
     };

@@ -87,6 +87,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     $scope.pressureType = initialChartType;
     $scope.lightType = initialChartType;
     $scope.directionType = initialChartType;
+    $scope.rainType = initialChartType;
 
 //    $scope.hasData = function(){
 //        apiService.getLastStationInformation($scope.stationId).success(function(data){
@@ -177,8 +178,21 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         })
     };
 
+    $scope.getRainChart = function(rainType){
+        $scope.rainType = rainType;
+        apiService.getStationRain($scope.stationId, rainType).success(function(data){
+            $scope.rainLabels = [];
+            $scope.rainData = [];
+            $scope.rainLabels = data.data.map(function(item){ return item.date;});
+            $scope.rainSeries = [$rootScope.selectedStationName + ' rain'];
+            $scope.rainData.push(data.data.map(function(item){ return item.rain;}));
+            k++;
+            $scope.checkLoading();
+        });
+    };
+
     $scope.checkLoading = function(){
-        if(k == 6){
+        if(k == 7){
             $scope.loading = false;
             if($scope.tempData[0].length > 0){
                 $scope.exist = true;
@@ -196,7 +210,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         $scope.getPressureChart($scope.pressureType);
         $scope.getLightChart($scope.lightType);
         $scope.getWindDirectionChart($scope.directionType);
-        console.log($scope.pressureData);
+        $scope.getRainChart($scope.rainType);
     };
     $scope.loadCharts();
 });

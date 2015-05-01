@@ -112,7 +112,7 @@ class ApiController extends Controller {
      * @param $format
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getStationWindSpeed($id, $format){
+    public function getStationWindSpeed($id, $format = "m"){
         $api = new Api($id, null, $this->user);
         $speeds = $api->getStationDataByFormat($format, 'wind_speed');
         return response()->json($speeds);
@@ -139,6 +139,18 @@ class ApiController extends Controller {
         $lightLevels = $api->getStationDataByFormat($format, 'light_level');
         return response()->json($lightLevels);
     }
+
+    /**
+     * @param $id
+     * @param $format
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationRain($id, $format){
+        $api = new Api($id, null, $this->user);
+        $rain = $api->getStationDataByFormat($format, 'rain');
+        return response()->json($rain);
+    }
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -156,6 +168,9 @@ class ApiController extends Controller {
         return response()->json($information);
     }
 
+    /**
+     * @param $dir
+     */
     public function tryDir($dir){
         $api = new Api("3RkTSJ", null, $this->user);
         $api->getWindDirectionName($dir);
@@ -166,12 +181,16 @@ class ApiController extends Controller {
      * @param $format
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getStationWindDirection($id, $format){
+    public function getStationWindDirection($id, $format = 'm'){
         $api = new Api($id, null, $this->user);
         $data = $api->getWindDirectionCounts($format);
         return response()->json($data);
     }
 
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function checkStationExist($id){
         $api = new Api($id, null,$this->user);
         $u = $this->user->find($id);

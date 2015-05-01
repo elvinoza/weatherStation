@@ -88,9 +88,17 @@ gulp.task('default', function() {
             'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js',
             'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/translation.js',
             'resources/lib/js/developer.js',
+
+            //'resources/lib/bootstrap-datepicker/js/bootstrap-datepicker.js',
             'resources/lib/angular/angular.js',
             'resources/lib/angular-route/angular-route.js',
             'resources/lib/Chart.js/Chart.js',
+            'resources/lib/angular-datepicker/app/scripts/datePicker.js',
+            'resources/lib/angular-datepicker/app/scripts/datePickerUtils.js',
+            'resources/lib/angular-datepicker/app/scripts/dateRange.js',
+            'resources/lib/angular-datepicker/app/scripts/input.js',
+
+            //'resources/lib/js/chartsDatePickers.js',
             'resources/lib/angular-chart.js/angular-chart.js',
             'resources/lib/js/ui-bootstrap-tpls-0.12.1.min.js',
             'resources/lib/ngprogress/build/ngProgress.js',

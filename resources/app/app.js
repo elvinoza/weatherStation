@@ -2,7 +2,7 @@
  * Created by elvinas on 3/26/15.
  */
 
-var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstrap', 'ngProgress','ngTable'], function($interpolateProvider){
+var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstrap', 'ngProgress','ngTable', 'datePicker'], function($interpolateProvider){
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
 })
