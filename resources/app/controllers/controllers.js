@@ -75,7 +75,7 @@ stationsApp.controller("NavBarController", function($scope, $location){
     }
 });
 
-stationsApp.controller("ChartsController", function($scope, $routeParams, $rootScope, apiService){
+stationsApp.controller("ChartsController", function($scope, $routeParams, $rootScope, apiService, $filter){
     var initialChartType = "m";
     $scope.loading = true;
     var k = 0;
@@ -110,6 +110,13 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             k++;
             $scope.checkLoading();
         });
+    };
+
+    $scope.getTemperatureChartByCustomDate = function(a, b){
+        var norma = $filter('date')(a, "yyyy-MM-dd");
+        var normb = $filter('date')(b,"yyyy-MM-dd");
+        console.log(norma);
+        console.log(normb);
     };
 
     $scope.getHumidityChart = function(humType){

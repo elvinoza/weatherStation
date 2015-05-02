@@ -1,27 +1,18 @@
 <div class="container">
 
-    <div class="dropdown">
-        <a class="dropdown-toggle btn btn-custom">
-            <% (a|date)||"pick start" %> - <% (b|date)||"pick end" %>
-        </a>
 
-        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
-            <div date-range start="a" end="b" class="ng-isolate-scope"></div>
-        </div>
-
-    </div>
 
 <section class="home-section color-dark bg-gray" style="padding-top: 50px" ng-if="loading === false && exist">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-3">Temperatures</h3>
-                    <div class="btn-group" style="padding-right: 100px">
-                        <label class="btn btn-custom">Day</label>
-                        <label class="btn btn-custom">Night</label>
-                        <label class="btn btn-custom">All</label>
-                    </div>
+                    <h3 class="panel-title col-lg-2">Temperatures</h3>
+                    <!--<div class="btn-group" style="padding-right: 50px">-->
+                        <!--<label class="btn btn-custom">Day</label>-->
+                        <!--<label class="btn btn-custom">Night</label>-->
+                        <!--<label class="btn btn-custom">All</label>-->
+                    <!--</div>-->
 
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'h'">Hour</label>
@@ -30,10 +21,28 @@
                         <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'m'">Month</label>
                         <label class="btn btn-custom" ng-change="showCustomDate(tempType)" ng-model="tempType" btn-radio="'c'">Custom</label>
                     </div>
+                    <% a|date: "yyyy-MM-dd" %>
+                    <div class="dropdown" ng-show="tempType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (a|date)||"pick start" %> - <% (b|date)||"pick end" %>
+                        </a>
+
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="a" end="b" class="ng-isolate-scope"></div>
+                        </div>
+
+                        <button ng-click="getTemperatureChartByCustomDate(a,b)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
+
+
+
                     <button ng-click="getTemperatureChart(tempType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
                 </div>
+
                 <div class="panel-body">
                     <div class="flot-chart">
                         <div class="flot-chart-content" id="flot-line-chart">
@@ -44,6 +53,9 @@
                         </div>
                     </div>
                 </div>
+                <!--<div class="panel-body col-lg-2" >-->
+
+                <!--</div>-->
             </div>
         </div>
     </div>

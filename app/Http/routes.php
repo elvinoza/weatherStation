@@ -88,6 +88,7 @@ Route::group(array('prefix' => 'developer'), function(){
 //api
 Route::group(array('prefix' => 'api/v1'), function(){
     //api/vi/get?app_id=3RkTSJ&app_key=KjdTEANlw6YPxKIPORINgmMKzQBTJtDt
+
     Route::get('/set', 'ApiController@insert');
 
     Route::get('get/stations-list', 'ApiController@getStations');
@@ -107,6 +108,8 @@ Route::group(array('prefix' => 'api/v1'), function(){
     Route::get('get/light_levels/{id}/{format}', 'ApiController@getStationLightLevels');
 
     Route::get('get/rain/{id}/{format}', 'ApiController@getStationRain');
+
+    Route::get('get/chartByDate/{id}/{chart}/{startDate}/{endDate}', 'ApiController@getStationDataByDate');
 
     Route::get('get/firstStation', 'ApiController@getFirstStation');
 

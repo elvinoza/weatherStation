@@ -11,6 +11,7 @@ use App\User;
 use App\Weather;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class Api {
 
@@ -141,6 +142,53 @@ class Api {
                                 ->get();
             }
             return array('success' => true, 'data' => $data);
+        } else {
+            return array('success' => false, 'error' => 'Station not found');
+        }
+    }
+
+    /**
+     * @param $chart
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     */
+    public function getChartByDate($chart, $startDate, $endDate){
+        $this->user = $this->user->find($this->app_id);
+        $inputs = array('chart' => $chart, 'startDate' => $startDate, 'endDate' => $endDate);
+        $chartTypeRules = array(
+            'chart'     => 'in:temperature,humidity,light_level,pressure,wind_direction,wind_speed,rain,all',
+            'startDate' => array('required', 'date_format:"Y-m-d"', 'regex:/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/'),
+            'endDate'   => array('required', 'date_format:"Y-m-d"', 'regex:/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/'),
+        );
+
+        if($this->user != null){
+            if(Validator::make($inputs, $chartTypeRules)->passes()){
+                $sd = \DateTime::createFromFormat("Y-m-d", $startDate);
+                $ed = \DateTime::createFromFormat("Y-m-d", $endDate);
+                if($sd <= $ed){
+                    if($chart != 'all'){
+                        $data = $this->user->weathers()
+                            ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '>=', $startDate)
+                            ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '<=', $endDate)
+                            ->select([DB::raw("AVG($chart) as $chart"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS date")])
+                            ->groupBy('date')
+                            ->get();
+                    } else {
+                        $data = $this->user->weathers()
+                            ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '>=', $startDate)
+                            ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '<=', $endDate)
+                            ->select([DB::raw("AVG(temperature) as temperature"), DB::raw("AVG(humidity) as humidity"), DB::raw("AVG(light_level) as light_level"),
+                                    DB::raw("AVG(pressure) as pressure"), DB::raw("AVG(wind_direction) as wind_direction"),DB::raw("AVG(wind_speed) as wind_speed"),
+                                    DB::raw("AVG(rain) as rain"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS date")])
+                            ->groupBy('date')
+                            ->get();
+                    }
+                    return array('success' => true, 'data' => $data);
+                }
+                return array('success' => false, 'error' => 'Start date must by less than end date');
+            }
+            return array('success' => false, 'error' => 'Get data must be: temperature, humidity, light_level, pressure, wind_direction, wind_speed, rain or all. Date format must be Y-m-d');
         } else {
             return array('success' => false, 'error' => 'Station not found');
         }

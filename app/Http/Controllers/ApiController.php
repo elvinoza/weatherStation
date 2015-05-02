@@ -152,6 +152,19 @@ class ApiController extends Controller {
     }
 
     /**
+     * @param $id
+     * @param $chart
+     * @param $startDate
+     * @param $endDate
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationDataByDate($id, $chart, $startDate, $endDate){
+        $api = new Api($id, null, $this->user);
+        $data = $api->getChartByDate($chart, $startDate, $endDate);
+        return response()->json($data);
+    }
+
+    /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getFirstStation(){

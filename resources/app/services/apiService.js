@@ -29,6 +29,10 @@ stationsApp.service('apiService', function($http){
         return $http.get(baseURL + 'get/rain/' + id + '/' + format);
     }
 
+    this.getStationDataByDate = function(id, chartType, startDate, endDate){
+        return $http.get(baseURL + 'get/chartByDate/' + id + '/' + chartType + '/' + startDate +'/' + endDate);
+    }
+
     this.getFirstStation = function(){
         return $http.get(baseURL + 'get/firstStation');
     };
