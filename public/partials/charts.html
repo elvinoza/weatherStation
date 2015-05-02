@@ -7,40 +7,34 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-2">Temperatures</h3>
+                    <h3 class="panel-title col-lg-6">Temperatures</h3>
                     <!--<div class="btn-group" style="padding-right: 50px">-->
                         <!--<label class="btn btn-custom">Day</label>-->
                         <!--<label class="btn btn-custom">Night</label>-->
                         <!--<label class="btn btn-custom">All</label>-->
                     <!--</div>-->
-
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="showCustomDate(tempType)" ng-model="tempType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="tempType" btn-radio="'c'">Custom</label>
                     </div>
-                    <% a|date: "yyyy-MM-dd" %>
-                    <div class="dropdown" ng-show="tempType === 'c'">
-                        <a class="dropdown-toggle btn btn-custom">
-                            <% (a|date)||"pick start" %> - <% (b|date)||"pick end" %>
-                        </a>
-
-                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
-                            <div date-range start="a" end="b" class="ng-isolate-scope"></div>
-                        </div>
-
-                        <button ng-click="getTemperatureChartByCustomDate(a,b)" type="button" class="btn btn-custom">
-                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                        </button>
-                    </div>
-
-
-
                     <button ng-click="getTemperatureChart(tempType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="tempType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (ta|date)||"pick start" %> - <% (tb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="ta" end="tb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getTemperatureChartByCustomDate(ta,tb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="panel-body">
@@ -53,9 +47,6 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="panel-body col-lg-2" >-->
-
-                <!--</div>-->
             </div>
         </div>
     </div>
@@ -63,16 +54,29 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-8">Humidity</h3>
+                    <h3 class="panel-title col-lg-6">Humidity</h3>
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'m'">Month</label>
+                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="humType" btn-radio="'c'">Custom</label>
                     </div>
-                    <button ng-click="getHumidityChart(humType)" type="button" class="btn btn-default">
+                    <button ng-click="getHumidityChart(humType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="humType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (ha|date)||"pick start" %> - <% (hb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="ha" end="hb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getHumidityChartByCustomDate(ha,hb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="flot-chart">
@@ -91,16 +95,29 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-8">Wind Speed(km/h)</h3>
+                    <h3 class="panel-title col-lg-6">Wind Speed(km/h)</h3>
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'m'">Month</label>
+                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="windSpeedType" btn-radio="'c'">Custom</label>
                     </div>
-                    <button ng-click="getWindSpeedChart(windSpeedType)" type="button" class="btn btn-default">
+                    <button ng-click="getWindSpeedChart(windSpeedType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="windSpeedType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (wsa|date)||"pick start" %> - <% (wsb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="wsa" end="wsb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getWindSpeedChartByCustomDate(wsa,wsb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="flot-chart">
@@ -119,16 +136,29 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-8">Pressure(Pa)</h3>
+                    <h3 class="panel-title col-lg-6">Pressure(Pa)</h3>
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'m'">Month</label>
+                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="pressureType" btn-radio="'c'">Custom</label>
                     </div>
-                    <button ng-click="getPressureChart(pressureType)" type="button" class="btn btn-default">
+                    <button ng-click="getPressureChart(pressureType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="pressureType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (pa|date)||"pick start" %> - <% (pb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="pa" end="pb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getPressureChartByCustomDate(pa,pb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="flot-chart">
@@ -147,16 +177,29 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-8">Light levels</h3>
+                    <h3 class="panel-title col-lg-6">Light levels</h3>
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'m'">Month</label>
+                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="lightType" btn-radio="'c'">Custom</label>
                     </div>
-                    <button ng-click="getLightChart(lightType)" type="button" class="btn btn-default">
+                    <button ng-click="getLightChart(lightType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="lightType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (la|date)||"pick start" %> - <% (lb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="la" end="lb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getLightChartByCustomDate(la,lb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="flot-chart">
@@ -175,16 +218,29 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-8">Wind directions</h3>
+                    <h3 class="panel-title col-lg-6">Wind directions</h3>
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'m'">Month</label>
+                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="directionType" btn-radio="'c'">Custom</label>
                     </div>
-                    <button ng-click="getWindDirectionChart(directionType)" type="button" class="btn btn-default">
+                    <button ng-click="getWindDirectionChart(directionType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="directionType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (wda|date)||"pick start" %> - <% (wdb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="wda" end="wdb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getWindDirectionChartByCustomDate(wda,wdb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="flot-chart">
@@ -203,16 +259,29 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-8">Rain</h3>
+                    <h3 class="panel-title col-lg-6">Rain</h3>
                     <div class="btn-group">
                         <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'h'">Hour</label>
                         <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'d'">Day</label>
                         <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'w'">Week</label>
                         <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'m'">Month</label>
+                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'y'">Year</label>
+                        <label class="btn btn-custom" ng-model="rainType" btn-radio="'c'">Custom</label>
                     </div>
-                    <button ng-click="getRainChart(rainType)" type="button" class="btn btn-default">
+                    <button ng-click="getRainChart(rainType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                     </button>
+                    <div class="dropdown" ng-show="rainType === 'c'">
+                        <a class="dropdown-toggle btn btn-custom">
+                            <% (ra|date)||"pick start" %> - <% (rb|date)||"pick end" %>
+                        </a>
+                        <div class="dropdown-menu" ng-click="$event.preventDefault();$event.stopPropagation()">
+                            <div date-range start="ra" end="rb" class="ng-isolate-scope"></div>
+                        </div>
+                        <button ng-click="getRainChartByCustomDate(ra,rb)" type="button" class="btn btn-custom">
+                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                        </button>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="flot-chart">

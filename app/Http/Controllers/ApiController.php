@@ -160,7 +160,10 @@ class ApiController extends Controller {
      */
     public function getStationDataByDate($id, $chart, $startDate, $endDate){
         $api = new Api($id, null, $this->user);
-        $data = $api->getChartByDate($chart, $startDate, $endDate);
+        if($chart != "wind_direction")
+            $data = $api->getChartByDate($chart, $startDate, $endDate);
+        else $data = $api->getWindDirectionCountsByDate($startDate, $endDate);
+
         return response()->json($data);
     }
 

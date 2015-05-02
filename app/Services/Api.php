@@ -140,6 +140,12 @@ class Api {
                                 ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
                                 ->groupBy('date')
                                 ->get();
+            } else if($format == "y"){
+                $data = $this->user->weathers()
+                    ->where('created_at', '>=', Carbon::now()->subYear())
+                    ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%Y-%m') AS date")])
+                    ->groupBy('date')
+                    ->get();
             }
             return array('success' => true, 'data' => $data);
         } else {
@@ -223,6 +229,47 @@ class Api {
             $result = $this->getDirectionsGroupedArray($dir);
 
             return array('success' => true, 'data' => $result);
+        } else {
+            return array('success' => false, 'error' => 'Station not found');
+        }
+    }
+
+    /**
+     * @param $startDate
+     * @param $endDate
+     * @return array
+     */
+    public function getWindDirectionCountsByDate($startDate, $endDate){
+        $this->user = $this->user->find($this->app_id);
+        $inputs = array('startDate' => $startDate, 'endDate' => $endDate);
+        $chartTypeRules = array(
+            'startDate' => array('required', 'date_format:"Y-m-d"', 'regex:/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/'),
+            'endDate'   => array('required', 'date_format:"Y-m-d"', 'regex:/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/'),
+        );
+        if($this->user != null)
+        {
+            if(Validator::make($inputs, $chartTypeRules)->passes()){
+                $sd = \DateTime::createFromFormat("Y-m-d", $startDate);
+                $ed = \DateTime::createFromFormat("Y-m-d", $endDate);
+                if($sd <= $ed){
+                    $dir = $this->user->weathers()
+                            ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '>=', $startDate)
+                            ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '<=', $endDate)
+                            ->select([DB::raw("COUNT(*) as c_direction"), "wind_direction"])
+                            ->groupBy("wind_direction")
+                            ->get();
+                    foreach($dir as $key => $item){
+                        $dir[$key]['wind_direction'] = $this->getWindDirectionName($item['wind_direction']);
+                    }
+
+                    $result = $this->getDirectionsGroupedArray($dir);
+                    return array('success' => true, 'data' => $result);
+                } else {
+                    return array('success' => false, 'error' => 'Start date must by less than end date');
+                }
+            } else {
+                return array('success' => false, 'error' => 'Date format must be Y-m-d.');
+            }
         } else {
             return array('success' => false, 'error' => 'Station not found');
         }

@@ -113,10 +113,15 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
     };
 
     $scope.getTemperatureChartByCustomDate = function(a, b){
-        var norma = $filter('date')(a, "yyyy-MM-dd");
-        var normb = $filter('date')(b,"yyyy-MM-dd");
-        console.log(norma);
-        console.log(normb);
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'temperature', start, end).success(function(data){
+            $scope.tempLabels = [];
+            $scope.tempData = [];
+            $scope.tempSeries = [$rootScope.selectedStationName + ' temperature'];
+            $scope.tempLabels = data.data.map(function(item){ return item.date;});
+            $scope.tempData.push(data.data.map(function(item){ return item.temperature;}));
+        });
     };
 
     $scope.getHumidityChart = function(humType){
@@ -129,6 +134,18 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.humData.push(data.data.map(function(item){ return item.humidity;}));
             k++;
             $scope.checkLoading();
+        });
+    };
+
+    $scope.getHumidityChartByCustomDate = function(a,b){
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'humidity', start, end).success(function(data){
+            $scope.humLabels = [];
+            $scope.humData = [];
+            $scope.humLabels = data.data.map(function(item){ return item.date;});
+            $scope.humSeries = [$rootScope.selectedStationName + ' humidity'];
+            $scope.humData.push(data.data.map(function(item){ return item.humidity;}));
         });
     };
 
@@ -145,6 +162,18 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         });
     };
 
+    $scope.getWindSpeedChartByCustomDate = function(a,b){
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'wind_speed', start, end).success(function(data){
+            $scope.windSpeedLabels = [];
+            $scope.windSpeedData = [];
+            $scope.windSpeedLabels = data.data.map(function(item){ return item.date;});
+            $scope.windSpeedSeries = [$rootScope.selectedStationName + ' wind speed'];
+            $scope.windSpeedData.push(data.data.map(function(item){ return item.wind_speed;}));
+        });
+    };
+
     $scope.getPressureChart = function(pressureType){
         $scope.pressureType = pressureType;
         apiService.getStationPressure($scope.stationId, pressureType).success(function(data){
@@ -158,6 +187,17 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         });
     };
 
+    $scope.getPressureChartByCustomDate = function(a,b){
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'pressure', start, end).success(function(data){
+            $scope.pressureLabels = [];
+            $scope.pressureData = [];
+            $scope.pressureLabels = data.data.map(function(item){ return item.date;});
+            $scope.pressureSeries = [$rootScope.selectedStationName + ' pressure'];
+            $scope.pressureData.push(data.data.map(function(item){ return item.pressure;}));
+        });
+    };
 
     $scope.getLightChart = function(lightType){
         $scope.lightType = lightType;
@@ -172,17 +212,41 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         });
     };
 
+    $scope.getLightChartByCustomDate = function(a,b){
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'light_level', start, end).success(function(data){
+            $scope.lightLabels = [];
+            $scope.lightData = [];
+            $scope.lightLabels = data.data.map(function(item){ return item.date;});
+            $scope.lightSeries = [$rootScope.selectedStationName + ' light level'];
+            $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
+        });
+    };
+
     $scope.getWindDirectionChart = function(directionType){
         $scope.directionType = directionType;
         apiService.getStationWindDirections($scope.stationId, directionType).success(function(data){
             $scope.directionLabels = [];
             $scope.directionData = [];
             $scope.directionLabels = Object.keys(data.data);
-            $scope.directionSeries = [$rootScope.selectedStationName + ' light level'];
+            $scope.directionSeries = [$rootScope.selectedStationName + ' wind direction'];
             $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
             k++;
             $scope.checkLoading();
         })
+    };
+
+    $scope.getWindDirectionChartByCustomDate = function(a,b){
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'wind_direction', start, end).success(function(data){
+            $scope.directionLabels = [];
+            $scope.directionData = [];
+            $scope.directionLabels = Object.keys(data.data);
+            $scope.directionSeries = [$rootScope.selectedStationName + ' wind direction'];
+            $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
+        });
     };
 
     $scope.getRainChart = function(rainType){
@@ -195,6 +259,18 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.rainData.push(data.data.map(function(item){ return item.rain;}));
             k++;
             $scope.checkLoading();
+        });
+    };
+
+    $scope.getRainChartByCustomDate = function(a,b){
+        var start = $filter('date')(a, "yyyy-MM-dd");
+        var end = $filter('date')(b,"yyyy-MM-dd");
+        apiService.getStationDataByDate($scope.stationId, 'rain', start, end).success(function(data){
+            $scope.rainLabels = [];
+            $scope.rainData = [];
+            $scope.rainLabels = data.data.map(function(item){ return item.date;});
+            $scope.rainSeries = [$rootScope.selectedStationName + ' rain'];
+            $scope.rainData.push(data.data.map(function(item){ return item.rain;}));
         });
     };
 
