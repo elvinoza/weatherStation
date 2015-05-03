@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div>
             <div class="row marginbot-80">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="row">
@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div>
             <div class="row marginbot-80">
                 <div class="col-md-8 col-md-offset-2">
                     {!!Form::model($user, ['route'=>'developer.update'])!!}
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div>
             <div class="row marginbot-80">
                 <div class="col-md-8 col-md-offset-2">
                     {!! Form::open(['route'=>'developer.change-pass']) !!}
@@ -97,6 +97,5 @@
                 </div>
             </div>
         </div>
-
     </section>
 @stop

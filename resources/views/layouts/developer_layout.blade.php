@@ -50,6 +50,7 @@
                             <li class="active"><a href="{{ route('developer.index') }}">Home</a></li>
                             @if(Auth::check())
                             <li><a href="{!! route('developer.station') !!}">{{ Auth::user()->station_name }}</a></li>
+                            <li><a href="{!! route('developer.documentation') !!}">Documentation</a></li>
                             <li><a href="{{ route('developer.logout') }}">Logout</a></li>
                             @else
                                 <li><a href="#contact">Sign up</a></li>
@@ -85,5 +86,6 @@
 </footer>
 
 </body>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 <script src="../../../js/developer-all.js"></script>
 </html>

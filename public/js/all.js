@@ -44362,7 +44362,8 @@ var stationsApp = angular.module('stations', ['ngRoute', 'chart.js', 'ui.bootstr
         };
 
         apiService.getStationList().success(function(data){
-            $rootScope.stations = data;
+            angular.extend($rootScope.stations, data);
+            //$rootScope.stations = data;
         });
         //wait async task
         //while(!flag){};

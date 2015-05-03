@@ -42,10 +42,10 @@ class ApiController extends Controller {
         if($api->authenticate()){
             $api->insertStationData(Input::get('t'), Input::get('h'), Input::get('l'),
                 Input::get('p'), Input::get('wd'), Input::get('ws'), Input::get('r'));
-            return response()->json(array('success'=>'true', 'message' => 'Successful authenticated'));
+            return response()->json(array('success'=> true, 'message' => 'Successfully authenticated and your data inserted'));
         }
         else {
-            return response()->json(array('success'=>'false', 'message' => 'Authenticate problem. Check your app_id and app_key or generate new.'));
+            return response()->json(array('success'=> false, 'message' => 'Authenticate problem. Check your app_id and app_key.'));
         }
     }
 

@@ -76,6 +76,11 @@ Route::group(array('prefix' => 'developer'), function(){
         'uses' => 'DeveloperController@changePassword'
     ));
 
+    Route::get('/documentation', array(
+        'as' => 'developer.documentation',
+        'uses' => 'DeveloperController@showDocumentation'
+    ));
+
     Route::get('/getNewKey', array(
         'as' => 'developer.generateNewKey',
         'uses' => 'DeveloperController@regenerateAppKey'

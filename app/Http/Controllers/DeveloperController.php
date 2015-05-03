@@ -18,6 +18,9 @@ class DeveloperController extends Controller {
 
     protected $user;
 
+    /**
+     * @param User $user
+     */
     public function __construct(User $user){
         if(Auth::check())
             $this->user = $user->find(Auth::user()->id);
@@ -25,11 +28,17 @@ class DeveloperController extends Controller {
             $this->user = Auth::user();
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
         return View('developer.index');
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
     public function updateForm()
     {
         $user = $this->user;
@@ -37,6 +46,10 @@ class DeveloperController extends Controller {
         return view('developer.update', ['user' => $user]);
     }
 
+    /**
+     * @param UpdateUserInfoRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateInfo(UpdateUserInfoRequest $request){
         $this->user->station_name = $request->station_name;
         $this->user->email = $request->email;
@@ -44,6 +57,10 @@ class DeveloperController extends Controller {
         return redirect()->route('developer.station');
     }
 
+    /**
+     * @param ChangePasswordRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function changePassword(ChangePasswordRequest $request){
 
         if(Hash::check($request->current_password, $this->user->password))
@@ -57,6 +74,10 @@ class DeveloperController extends Controller {
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function regenerateAppKey(Request $request){
         $generated = true;
         $new_key = "";
@@ -70,6 +91,16 @@ class DeveloperController extends Controller {
         return redirect()->route('developer.update');
     }
 
+    /**
+     * @return \Illuminate\View\View
+     */
+    public function showDocumentation(){
+        return View('developer.documentation');
+    }
+
+    /**
+     *
+     */
     public function getStationData(){
         dd($this->user->weathers);
     }
