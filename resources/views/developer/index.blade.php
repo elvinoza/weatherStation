@@ -59,8 +59,7 @@
             </div>
         </div>
         <div class="text-center">
-            <div class="container">
-
+            <div>
                 <div class="row animatedParent">
                     <div class="col-xs-6 col-sm-4 col-md-4">
                         <div class="animated rotateInDownLeft">
@@ -110,7 +109,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
