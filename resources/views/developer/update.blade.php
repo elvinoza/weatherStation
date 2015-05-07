@@ -59,6 +59,14 @@
                                 {!! Form::label('email','Email',['class'=>'control-label']) !!}
                                 {!! Form::text('email',Input::old('email'),['class'=>'form-control']) !!}
                             </div>
+                            <div class="form-group">
+                                {!! Form::label('location','Location',['class'=>'control-label']) !!}
+                                {!! Form::text('location',Input::old('location'),['class'=>'form-control']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('description','Description',['class'=>'control-label']) !!}
+                                {!! Form::text('description',Input::old('description'),['class'=>'form-control']) !!}
+                            </div>
                         </div>
                     </div>
 

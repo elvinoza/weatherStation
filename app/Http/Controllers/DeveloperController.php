@@ -53,6 +53,8 @@ class DeveloperController extends Controller {
     public function updateInfo(UpdateUserInfoRequest $request){
         $this->user->station_name = $request->station_name;
         $this->user->email = $request->email;
+        $this->user->location = $request->location;
+        $this->user->description = $request->description;
         $this->user->save();
         return redirect()->route('developer.station');
     }

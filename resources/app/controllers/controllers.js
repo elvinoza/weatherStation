@@ -22,12 +22,12 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
     var count = 0;
     var int = $interval(function(){
         ngProgress.set(count);
-        count = count + 1;
+        count = count + 0.5;
         if(count == 100){
             ngProgress.start();
             count = 0;
         }
-    }, 700);
+    }, 500);
 
     $scope.$on('$destroy', function () {
         $interval.cancel(int);
@@ -50,7 +50,7 @@ stationsApp.controller('HomeController', function ($scope, $rootScope, apiServic
                 $scope.has = false;
             }
         });
-    }, 70000);
+    }, 100000);
 
     $scope.getStationId();
     $scope.getStationInformation();
