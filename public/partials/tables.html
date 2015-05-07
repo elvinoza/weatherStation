@@ -1,5 +1,5 @@
 <div class="container">
-    <section class="home-section color-dark bg-gray" style="padding-top: 50px">
+    <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1">
             <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Clear sorting</button>
@@ -34,7 +34,30 @@
         </div>
     </div>
     </section>
-    <script type="text/ng-template" id="ng-table/filters/dobRange.html">
-        <input type="daterange" ng-model="params.dateRange">
-    </script>
+    <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <button ng-click="tableParamsForStation.sorting({})" class="btn btn-custom pull-right">Clear sorting</button>
+                <table ng-table="tableParamsForStation" show-filter="true" class="table">
+                    <tr ng-repeat="station in $data" class="text-center">
+                        <td data-title="'Id'" sortable="'id'">
+                            <% station.id %>
+                        </td>
+                        <td data-title="'Station name'" sortable="'station_name'">
+                            <% station.station_name %>
+                        </td>
+                        <td data-title="'Location'" sortable="'location'">
+                            <% station.location %>
+                        </td>
+                        <td data-title="'description'" sortable="'description'">
+                            <% station.description %>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!--<script type="text/ng-template" id="ng-table/filters/dobRange.html">-->
+        <!--<input type="daterange" ng-model="params.dateRange">-->
+    <!--</script>-->
 </div>

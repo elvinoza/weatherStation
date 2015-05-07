@@ -79,7 +79,7 @@ class ApiController extends Controller {
      */
     public function getStations()
     {
-        return response()->json($this->user->all(['id', 'station_name']));
+        return response()->json($this->user->all(['id', 'station_name', 'location', 'description']));
     }
 
     //day, month, hour, week

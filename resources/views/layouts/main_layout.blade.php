@@ -13,7 +13,10 @@
                 <div class="row">
                     <div class="col-md-2">
                         <div class="site-logo">
-                            <a class="brand"><% selectedStationName %></a>
+                            <a id="dropdownMenu1" data-toggle="dropdown" style="cursor: pointer" class="brand"><% selectedStationName %></a>
+                            <select  class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" class="form-control" ng-model="station" ng-init="station"  ng-change="setStationId(station)" ng-options="station1.station_name for station1 in stations">
+                                <option style="display:none" value="">Select station</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-10">
