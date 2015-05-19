@@ -61,7 +61,7 @@ class Api {
             'temperature'     => $temperature,
             'humidity'        => $humidity,
             'light_level'     => $light_level,
-            'pressure'         => $pressure,
+            'pressure'        => $pressure,
             'wind_direction'  => $wind_direction,
             'wind_speed'      => $wind_speed,
             'rain'            => $rain
@@ -214,6 +214,8 @@ class Api {
                 $date = Carbon::now()->subDay();
             } else if($format == "w"){
                 $date = Carbon::now()->subWeek();
+            } else if($format == "y"){
+                $date = Carbon::now()->subYear();
             } else {
                 $date = Carbon::now()->subMonth();
             }
@@ -317,28 +319,28 @@ class Api {
         $direction_name = "";
         switch($direction){
             case $direction <= 22.5 || $direction >= 337.5:
-                $direction_name = "N";
+                $direction_name = "Š";
                 break;
             case $direction > 22.5 && $direction <=  67.5:
-                $direction_name = "NE";
+                $direction_name = "ŠR";
                 break;
             case $direction > 67.5 && $direction <= 112.5:
-                $direction_name = "E";
+                $direction_name = "R";
                 break;
             case $direction > 112.5 && $direction <= 157.5:
-                $direction_name = "SE";
+                $direction_name = "PR";
                 break;
             case $direction > 157.5 && $direction <= 202.5:
-                $direction_name = "S";
+                $direction_name = "P";
                 break;
             case $direction > 202.5 && $direction <= 247.5:
-                $direction_name = "SW";
+                $direction_name = "PV";
                 break;
             case $direction > 247.5 && $direction <= 292.5:
-                $direction_name = "W";
+                $direction_name = "V";
                 break;
             case $direction > 292.5 && $direction <= 337.5:
-                $direction_name = "NW";
+                $direction_name = "ŠV";
                 break;
         }
         return $direction_name;
@@ -350,15 +352,16 @@ class Api {
      */
     public function getDirectionsGroupedArray($directions){
         $grouped = [
-            "N" => 0,
-            "NE" => 0,
-            "E" => 0,
-            "SE" => 0,
-            "S" => 0,
-            "SW" => 0,
-            "W" => 0,
-            "NW" => 0
+            "Š" => 0,
+            "ŠR" => 0,
+            "R" => 0,
+            "PR" => 0,
+            "P" => 0,
+            "PV" => 0,
+            "V" => 0,
+            "ŠV" => 0
         ];
+
         foreach($directions as $direction){
             $grouped[$direction['wind_direction']] += $direction['c_direction'];
         }

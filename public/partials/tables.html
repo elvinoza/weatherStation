@@ -4,7 +4,6 @@
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
-                    <p><strong>Filter:</strong> <% tableParams.filter()|json %>
                     <table ng-table="tableParams" show-filter="true" class="table">
                         <tr ng-repeat="weather in $data" class="text-center">
                             <td data-title="'Temperatūra'" sortable="'temperature'">
