@@ -300,6 +300,8 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
 
 stationsApp.controller("TablesController", function($scope, $routeParams, apiService, $filter, ngTableParams){
     $scope.stationId = $routeParams.selectedStationId;
+    $scope.loaded1 = false;
+    $scope.loaded2 = false;
 
     $scope.loadAllDataForMainTable = function(){
         apiService.getAllStationData($scope.stationId).success(function(data){
@@ -325,7 +327,8 @@ stationsApp.controller("TablesController", function($scope, $routeParams, apiSer
                     $defer.resolve($scope.weathers);
                 }
                 }
-            )
+            );
+            $scope.loaded2 = true;
         });
     };
 
@@ -353,7 +356,8 @@ stationsApp.controller("TablesController", function($scope, $routeParams, apiSer
                         $defer.resolve($scope.stations);
                     }
                 }
-            )
+            );
+            $scope.loaded1 = true;
         });
     };
 

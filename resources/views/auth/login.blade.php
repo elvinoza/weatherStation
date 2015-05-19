@@ -10,7 +10,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <div class="animatedParent">
                         <div class="section-heading text-center">
-                            <h2 class="h-bold animated bounceInDown">Sign in</h2>
+                            <h2 class="h-bold animated bounceInDown">Prisijungimas</h2>
                             <div class="divider-header"></div>
                         </div>
                     </div>
@@ -27,15 +27,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                {!! Form::text('email',Input::old('email'),['class'=>'form-control input-lg', 'placeholder' => 'Email', 'required' => 'required']) !!}
+                                {!! Form::text('email',Input::old('email'),['class'=>'form-control input-lg', 'placeholder' => 'Elektroninio pašto adresas', 'required' => 'required']) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::password('password',['class'=>'form-control input-lg', 'placeholder' => 'Password', 'required' => 'required']) !!}
+                                {!! Form::password('password',['class'=>'form-control input-lg', 'placeholder' => 'Slaptažodis', 'required' => 'required']) !!}
                             </div>
                         </div>
                     </div>
                     <div class="text-center">
-                        {!!Form::submit('Sign in',['class'=>'btn btn-skin btn-lg btn-block', 'id' => 'btnContactUs'])!!}
+                        {!!Form::submit('Prisijungti',['class'=>'btn btn-skin btn-lg btn-block', 'id' => 'btnContactUs'])!!}
                     </div>
                     {!!Form::close()!!}
                 </div>

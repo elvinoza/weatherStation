@@ -97,12 +97,12 @@ class AuthController extends Controller {
         }
 
         return redirect()->route('developer.sign-in')->withErrors([
-            'email' => 'The credentials you entered did not match our records. Try again?',
+            'email' => 'Blogas el. pašto adresas arba slaptažodis. Bandykite dar kartą.',
         ]);
     }
 
     /**
-     * Log the user out of the application.
+     * Log the user out of the developer tab.
      *
      * @return Response
      */
@@ -111,6 +111,16 @@ class AuthController extends Controller {
         $this->auth->logout();
 
         return redirect()->route('developer.index');
+    }
+
+
+    /**
+     *
+     */
+    public function autoLogout(){
+        $this->auth->logout();
+
+        return redirect()->route('home-page');
     }
 
     /**

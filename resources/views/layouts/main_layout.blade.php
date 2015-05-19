@@ -29,15 +29,14 @@
                         <!-- Collect the nav links, forms, and other content for toggling -->
                         <div class="collapse navbar-collapse" id="menu">
                             <ul class="nav navbar-nav navbar-right">
-                                <li ng-class="{ active: isActive('/') }"><a href="#/" data-target="#">Home</a></li>
-                                <li ng-class="{ active: isActive('/charts/') }"><a href="#/charts/<% selectedStationId %>" data-target="#charts">Charts</a></li>
-                                <li ng-class="{ active: isActive('/tables/') }"><a href="#/tables/<% selectedStationId %>" data-target="#tables">Tables</a></li>
+                                <li ng-class="{ active: isActive('/') }"><a href="#/" data-target="#">Pagrindinis</a></li>
+                                <li ng-class="{ active: isActive('/charts/') }"><a href="#/charts/<% selectedStationId %>" data-target="#charts">Grafikai</a></li>
+                                <li ng-class="{ active: isActive('/tables/') }"><a href="#/tables/<% selectedStationId %>" data-target="#tables">Lentelės</a></li>
 
                                 <li><a href="{{ route('developer.index') }}">API</a></li>
                             </ul>
                         </div>
                         <!-- /.Navbar-collapse -->
-
                     </div>
                 </div>
             </div>

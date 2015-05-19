@@ -7,19 +7,19 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Temperatures</h3>
+                    <h3 class="panel-title col-lg-4">Temperatūra</h3>
                     <!--<div class="btn-group" style="padding-right: 50px">-->
                         <!--<label class="btn btn-custom">Day</label>-->
                         <!--<label class="btn btn-custom">Night</label>-->
                         <!--<label class="btn btn-custom">All</label>-->
                     <!--</div>-->
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="tempType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getTemperatureChart(tempType)" ng-model="tempType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="tempType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getTemperatureChart(tempType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -54,14 +54,14 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Humidity</h3>
+                    <h3 class="panel-title col-lg-4">Drėgmė</h3>
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="humType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getHumidityChart(humType)" ng-model="humType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="humType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getHumidityChart(humType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -95,14 +95,14 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Wind Speed(km/h)</h3>
+                    <h3 class="panel-title col-lg-4">Vėjo greitis(km/h)</h3>
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="windSpeedType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getWindSpeedChart(windSpeedType)" ng-model="windSpeedType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="windSpeedType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getWindSpeedChart(windSpeedType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -136,14 +136,14 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Pressure(Pa)</h3>
+                    <h3 class="panel-title col-lg-4">Slėgis(Pa)</h3>
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="pressureType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getPressureChart(pressureType)" ng-model="pressureType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="pressureType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getPressureChart(pressureType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -177,14 +177,14 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Light levels</h3>
+                    <h3 class="panel-title col-lg-4">Šviesos lygis</h3>
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="lightType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getLightChart(lightType)" ng-model="lightType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="lightType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getLightChart(lightType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -218,14 +218,14 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Wind directions</h3>
+                    <h3 class="panel-title col-lg-4">Vėjo kryptis</h3>
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="directionType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getWindDirectionChart(directionType)" ng-model="directionType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="directionType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getWindDirectionChart(directionType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -259,14 +259,14 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="panel panel-custom">
                 <div class="panel-heading" >
-                    <h3 class="panel-title col-lg-6">Rain</h3>
+                    <h3 class="panel-title col-lg-4">Kritulių kiekis(mm)</h3>
                     <div class="btn-group">
-                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'h'">Hour</label>
-                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'d'">Day</label>
-                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'w'">Week</label>
-                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'m'">Month</label>
-                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'y'">Year</label>
-                        <label class="btn btn-custom" ng-model="rainType" btn-radio="'c'">Custom</label>
+                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'h'">Valandos</label>
+                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'d'">Dienos</label>
+                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'w'">Savaitės</label>
+                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'m'">Mėnesio</label>
+                        <label class="btn btn-custom" ng-change="getRainChart(rainType)" ng-model="rainType" btn-radio="'y'">Metų</label>
+                        <label class="btn btn-custom" ng-model="rainType" btn-radio="'c'">Pasirinkti</label>
                     </div>
                     <button ng-click="getRainChart(rainType)" type="button" class="btn btn-custom">
                         <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -303,7 +303,7 @@
 <section class="home-section color-dark bg-gray" style="padding-top: 50px; height: 100%;" ng-if="loading === false && exist === false">
     <div class="row">
         <div class="col-lg-10 col-lg-offset-4" style="color: #3dc9b3; font-size: 30px">
-            Sorry, this station has no information!
+            Ši stotelė neturi jokios informacijos!
         </div>
     </div>
 </section>

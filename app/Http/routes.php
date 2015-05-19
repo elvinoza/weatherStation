@@ -61,6 +61,11 @@ Route::group(array('prefix' => 'developer'), function(){
         'uses' => 'Auth\AuthController@getLogout'
     ));
 
+    Route::get('/auto-logout', array(
+        'as' => 'developer.auto_logout',
+        'uses' => 'Auth\AuthController@autoLogout'
+    ));
+
     Route::get('/station', array(
         'as' => 'developer.station',
         'uses' => 'DeveloperController@updateForm'
@@ -88,6 +93,10 @@ Route::group(array('prefix' => 'developer'), function(){
 
     Route::get('/data', 'DeveloperController@getStationData');
 
+    Route::get('/delete', array(
+        'as' => 'developer.delete',
+        'uses' => 'DeveloperController@deleteStation'
+    ));
 });
 
 //api

@@ -11683,7 +11683,11 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 
 }(jQuery);
 
-
+(function($) {
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus()
+    })
+})(jQuery);
 /**
  * @license AngularJS v1.3.15
  * (c) 2010-2014 Google, Inc. http://angularjs.org
@@ -44670,16 +44674,15 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
 
 stationsApp.controller("TablesController", function($scope, $routeParams, apiService, $filter, ngTableParams){
     $scope.stationId = $routeParams.selectedStationId;
+    $scope.loaded1 = false;
+    $scope.loaded2 = false;
 
     $scope.loadAllDataForMainTable = function(){
         apiService.getAllStationData($scope.stationId).success(function(data){
             var information = data;
             $scope.tableParams = new ngTableParams({
                 page: 1,
-                count: 10,
-                filter: {
-                    name: ''
-                }
+                count: 10
             },{
                 total: information.length,
                 getData: function($defer, params) {
@@ -44695,7 +44698,8 @@ stationsApp.controller("TablesController", function($scope, $routeParams, apiSer
                     $defer.resolve($scope.weathers);
                 }
                 }
-            )
+            );
+            $scope.loaded2 = true;
         });
     };
 
@@ -44723,7 +44727,8 @@ stationsApp.controller("TablesController", function($scope, $routeParams, apiSer
                         $defer.resolve($scope.stations);
                     }
                 }
-            )
+            );
+            $scope.loaded1 = true;
         });
     };
 

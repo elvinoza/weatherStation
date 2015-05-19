@@ -1,63 +1,65 @@
 <div class="container">
-    <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
-    <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-            <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Clear sorting</button>
-            <table ng-table="tableParams" show-filter="true" class="table">
-                <tr ng-repeat="weather in $data" class="text-center">
-                    <td data-title="'Temperature'" sortable="'temperature'">
-                        <% weather.temperature %>
-                    </td>
-                    <td data-title="'Humidity'" sortable="'humidity'">
-                        <% weather.humidity %>
-                    </td>
-                    <td data-title="'Light level'" sortable="'light_level'">
-                        <% weather.light_level %>
-                    </td>
-                    <td data-title="'Pressure'" sortable="'pressure'">
-                        <% weather.pressure %>
-                    </td>
-                    <td data-title="'Wind direction(degrees)'" sortable="'wind_direction'">
-                        <% weather.wind_direction %>
-                    </td>
-                    <td data-title="'Wind Speed'" sortable="'wind_speed'">
-                        <% weather.wind_speed %>
-                    </td>
-                    <td data-title="'Rain'" sortable="'rain'">
-                        <% weather.rain %>
-                    </td>
-                    <td data-title="'Date'" filter="{ 'created_at': 'text' }">
-                        <% weather.created_at %>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    </section>
-    <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
-        <div class="row">
-            <div class="col-lg-10 col-lg-offset-1">
-                <button ng-click="tableParamsForStation.sorting({})" class="btn btn-custom pull-right">Clear sorting</button>
-                <table ng-table="tableParamsForStation" show-filter="true" class="table">
-                    <tr ng-repeat="station in $data" class="text-center">
-                        <td data-title="'Id'" sortable="'id'">
-                            <% station.id %>
-                        </td>
-                        <td data-title="'Station name'" sortable="'station_name'">
-                            <% station.station_name %>
-                        </td>
-                        <td data-title="'Location'" sortable="'location'">
-                            <% station.location %>
-                        </td>
-                        <td data-title="'description'" sortable="'description'">
-                            <% station.description %>
-                        </td>
-                    </tr>
-                </table>
+    <div  ng-if="loaded1 === true && loaded2 === true">
+        <section class="home-section color-dark bg-gray" style="padding-top: 50px">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
+                    <table ng-table="tableParams" show-filter="true" class="table">
+                        <tr ng-repeat="weather in $data" class="text-center">
+                            <td data-title="'Temperatūra'" sortable="'temperature'">
+                                <% weather.temperature %>
+                            </td>
+                            <td data-title="'Drėgmė'" sortable="'humidity'">
+                                <% weather.humidity %>
+                            </td>
+                            <td data-title="'Šviesos lygis'" sortable="'light_level'">
+                                <% weather.light_level %>
+                            </td>
+                            <td data-title="'Slėgis'" sortable="'pressure'">
+                                <% weather.pressure %>
+                            </td>
+                            <td data-title="'Vėjo kryptis(&deg;)'" sortable="'wind_direction'">
+                                <% weather.wind_direction %>
+                            </td>
+                            <td data-title="'Vėjo kryptis'" sortable="'wind_speed'">
+                                <% weather.wind_speed %>
+                            </td>
+                            <td data-title="'Kritulių kiekis'" sortable="'rain'">
+                                <% weather.rain %>
+                            </td>
+                            <td data-title="'Data'" filter="{ 'created_at': 'text' }">
+                                <% weather.created_at %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-        </div>
+        </section>
+        <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <button ng-click="tableParamsForStation.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
+                    <table ng-table="tableParamsForStation" show-filter="false" class="table">
+                        <tr ng-repeat="station in $data" class="text-center">
+                            <td data-title="'Id'" sortable="'id'">
+                                <% station.id %>
+                            </td>
+                            <td data-title="'Stotelės vardas'" sortable="'station_name'">
+                                <% station.station_name %>
+                            </td>
+                            <td data-title="'Vieta'" sortable="'location'">
+                                <% station.location %>
+                            </td>
+                            <td data-title="'Aprašymas'" sortable="'description'">
+                                <% station.description %>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+    <section class="home-section color-dark bg-gray" style="padding-top: 50px; height: 100%;" ng-if="loaded1 === false || loaded2 === false">
+        <img src="img/preloader.GIF" width="68" class="center-block" alt="Location" />
     </section>
-    <!--<script type="text/ng-template" id="ng-table/filters/dobRange.html">-->
-        <!--<input type="daterange" ng-model="params.dateRange">-->
-    <!--</script>-->
 </div>

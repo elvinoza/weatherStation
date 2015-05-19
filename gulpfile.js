@@ -49,7 +49,18 @@ gulp.task('scripts', function(){
 
 gulp.task('developer', function(){
     gulp.src(['resources/lib/jquery/jquery.js',
-            'resources/lib/bootstrap.min.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/affix.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/alert.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/button.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/carousel.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/collapse.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/dropdown.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/modal.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tooltip.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/popover.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/scrollspy.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/tab.js',
+            'resources/lib/bootstrap-sass-official/vendor/assets/javascripts/bootstrap/translation.js',
             'resources/lib/template/js/jquery.sticky.js',
             'resources/lib/template/js/jquery.easing.min.js',
             'resources/lib/template/js/jquery.scrollTo.js',
@@ -57,7 +68,8 @@ gulp.task('developer', function(){
             'resources/lib/template/js/stellar.js',
             'resources/lib/template/js/nivo-lightbox.min.js',
             'resources/lib/template/js/custom.js',
-            'resources/lib/template/js/css3-animate-it.js'
+            'resources/lib/template/js/css3-animate-it.js',
+            'resources/lib/js/developer.js'
         ])
         .pipe(concat('developer-all.js'))
         .pipe(gulp.dest('public/js'));

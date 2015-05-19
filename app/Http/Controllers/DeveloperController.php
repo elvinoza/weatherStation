@@ -101,6 +101,14 @@ class DeveloperController extends Controller {
     }
 
     /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteStation(){
+        $this->user->delete();
+        return redirect()->route('developer.index');
+    }
+
+    /**
      *
      */
     public function getStationData(){

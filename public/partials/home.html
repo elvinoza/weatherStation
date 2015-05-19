@@ -24,7 +24,7 @@
                 <div class="weather-days col-xs-12 col-md-2">
                     <div>
                         <span class="badge">
-                           Temperature
+                           Temperatūra
                         </span><br />
                         <span class="temp-title">
                           <% temperature %> &deg;C
@@ -34,7 +34,7 @@
                 <div class="weather-days col-xs-12 col-md-2">
                     <div>
                         <span class="badge">
-                           Humidity
+                           Drėgmė
                         </span><br />
                         <span class="temp-title">
                           <% humidity %> %
@@ -44,7 +44,7 @@
                 <div class="weather-days col-xs-12 col-md-2">
                     <div>
                         <span class="badge">
-                           Wind speed
+                           Vėjo greitis
                         </span><br />
                         <span class="temp-title">
                           <% wind_speed %> km/h
@@ -54,7 +54,7 @@
                 <div class="weather-days col-xs-12 col-md-2">
                     <div>
                         <span class="badge">
-                           Wind direction
+                           Vėjo kryptis
                         </span><br />
                         <span class="temp-title">
                           <% wind_direction %>
@@ -64,7 +64,7 @@
                 <div class="weather-days col-xs-12 col-md-2">
                     <div>
                         <span class="badge">
-                           Rain
+                           Kritulių kiekis
                         </span><br />
                         <span class="temp-title">
                           <% rain %> mm
@@ -74,7 +74,7 @@
                 <div class="weather-days col-xs-12 col-md-2">
                     <div>
                         <span class="badge">
-                           Pressure
+                           Slėgis
                         </span><br />
                         <span class="temp-title">
                           <% pressure %> Pa
@@ -85,7 +85,7 @@
             <div class="row" ng-show="!has">
                 <div class="weather-days col-xs-12 col-md-12">
                     <span class="temp-title">
-                        Sorry, but this station has not any information...
+                        Ši stotelė neturi jokios informacijos...
                     </span>
                 </div>
             </div>
@@ -97,14 +97,14 @@
         <div class="col-lg-4 pull-right">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Select station</h3>
+                    <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i>Pasirinkite stotelę</h3>
                 </div>
                 <div class="panel-body">
                     <div>
                         <div class="dropdown">
                             <div>
                                 <select class="form-control" ng-model="station" ng-init="station"  ng-change="setStationId(station)" ng-options="station1.station_name for station1 in stations">
-                                    <option style="display:none" value="">Select station</option>
+                                    <option style="display:none" value="">Pasirinkite</option>
                                 </select>
                             </div>
                         </div>

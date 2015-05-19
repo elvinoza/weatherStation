@@ -28,4 +28,21 @@ class RegisteRequest extends FormRequest {
         return true;
     }
 
+    /**
+     * Error messages
+     * @return array
+     */
+    public function messages(){
+        return array(
+            'station_name.unique' => 'Toks stotelės varadas jau egzistuoja. Pabandykite kitą!',
+            'station_name.required' => 'Būtina įvesti stotelės vardą!',
+            'station_name.min' => 'Stotelės vardo ilgis turi būti ilgesnis, nei 3 simboliai.',
+            'email.required' => 'Būtina įvesti elektorninį paštą.',
+            'email.email' => 'Neteisingas elektroninis paštas. Turi būti example@pvz.lt',
+            'email.unique' => 'Tokiu elektroniniu parštu jau yra užregistruota stotelė.',
+            'password.required' => 'Būtina įvesti slaptažodį.',
+            'password.confirmed' => 'Slaptažodis turi būti patvirtintas.',
+            'password.min' => 'Slaptažodis turi būti ilgesnis, nei 8 simboliai.',
+        );
+    }
 }
