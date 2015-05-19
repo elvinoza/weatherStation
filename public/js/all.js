@@ -44682,16 +44682,19 @@ stationsApp.controller("TablesController", function($scope, $routeParams, apiSer
             var information = data;
             $scope.tableParams = new ngTableParams({
                 page: 1,
-                count: 10
+                count: 10,
+                filter: {
+                    created_at: ''
+                }
             },{
                 total: information.length,
                 getData: function($defer, params) {
                     // use build-in angular filter
-                    var orderedData = params.filter() ?
-                        $filter('filter')(information, params.filter()) :
-                        information;
+                    var orderedData = information;
 
-                    orderedData = params.sorting() ? $filter('orderBy')(information, params.orderBy()):information;
+
+                    orderedData = params.sorting() ? $filter('orderBy')(orderedData, params.orderBy()):orderedData;
+                    orderedData = params.filter() ? $filter('filter')(orderedData, params.filter()) : orderedData;
                     $scope.weathers = orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count());
 
                     params.total(orderedData.length); // set total for recalc pagination

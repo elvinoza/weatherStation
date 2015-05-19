@@ -4,6 +4,7 @@
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
+                    <p><strong>Filter:</strong> <% tableParams.filter()|json %>
                     <table ng-table="tableParams" show-filter="true" class="table">
                         <tr ng-repeat="weather in $data" class="text-center">
                             <td data-title="'Temperatūra'" sortable="'temperature'">
@@ -38,8 +39,8 @@
         <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <button ng-click="tableParamsForStation.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
-                    <table ng-table="tableParamsForStation" show-filter="false" class="table">
+                    <button ng-click="tableParamsForStation.sorting({})" class="btn btn-custom pull-right" style="margin-bottom: 10px">Išvalyti rikiavimą</button>
+                    <table ng-table="tableParamsForStation" show-filter="false" class="table" >
                         <tr ng-repeat="station in $data" class="text-center">
                             <td data-title="'Id'" sortable="'id'">
                                 <% station.id %>
