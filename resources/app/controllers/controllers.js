@@ -104,7 +104,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         apiService.getStationTemperature($scope.stationId, tempType).success(function(data){
             $scope.tempLabels = [];
             $scope.tempData = [];
-            $scope.tempSeries = [$rootScope.selectedStationName + ' temperature'];
+            $scope.tempSeries = [$rootScope.selectedStationName + ' temperatūra'];
             $scope.tempLabels = data.data.map(function(item){ return item.date;});
             $scope.tempData.push(data.data.map(function(item){ return item.temperature;}));
             k++;
@@ -118,7 +118,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
         apiService.getStationDataByDate($scope.stationId, 'temperature', start, end).success(function(data){
             $scope.tempLabels = [];
             $scope.tempData = [];
-            $scope.tempSeries = [$rootScope.selectedStationName + ' temperature'];
+            $scope.tempSeries = [$rootScope.selectedStationName + ' temperatūra'];
             $scope.tempLabels = data.data.map(function(item){ return item.date;});
             $scope.tempData.push(data.data.map(function(item){ return item.temperature;}));
         });
@@ -130,7 +130,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.humLabels = [];
             $scope.humData = [];
             $scope.humLabels = data.data.map(function(item){ return item.date;});
-            $scope.humSeries = [$rootScope.selectedStationName + ' humidity'];
+            $scope.humSeries = [$rootScope.selectedStationName + ' drėgmė'];
             $scope.humData.push(data.data.map(function(item){ return item.humidity;}));
             k++;
             $scope.checkLoading();
@@ -144,7 +144,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.humLabels = [];
             $scope.humData = [];
             $scope.humLabels = data.data.map(function(item){ return item.date;});
-            $scope.humSeries = [$rootScope.selectedStationName + ' humidity'];
+            $scope.humSeries = [$rootScope.selectedStationName + ' drėgmė'];
             $scope.humData.push(data.data.map(function(item){ return item.humidity;}));
         });
     };
@@ -155,7 +155,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.windSpeedLabels = [];
             $scope.windSpeedData = [];
             $scope.windSpeedLabels = data.data.map(function(item){ return item.date;});
-            $scope.windSpeedSeries = [$rootScope.selectedStationName + ' wind speed'];
+            $scope.windSpeedSeries = [$rootScope.selectedStationName + ' vėjo greitis'];
             $scope.windSpeedData.push(data.data.map(function(item){ return item.wind_speed;}));
             k++;
             $scope.checkLoading();
@@ -169,7 +169,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.windSpeedLabels = [];
             $scope.windSpeedData = [];
             $scope.windSpeedLabels = data.data.map(function(item){ return item.date;});
-            $scope.windSpeedSeries = [$rootScope.selectedStationName + ' wind speed'];
+            $scope.windSpeedSeries = [$rootScope.selectedStationName + ' vėjo greitis'];
             $scope.windSpeedData.push(data.data.map(function(item){ return item.wind_speed;}));
         });
     };
@@ -180,7 +180,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.pressureLabels = [];
             $scope.pressureData = [];
             $scope.pressureLabels = data.data.map(function(item){ return item.date;});
-            $scope.pressureSeries = [$rootScope.selectedStationName + ' pressure'];
+            $scope.pressureSeries = [$rootScope.selectedStationName + ' slėgis'];
             $scope.pressureData.push(data.data.map(function(item){ return item.pressure;}));
             k++;
             $scope.checkLoading();
@@ -194,7 +194,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.pressureLabels = [];
             $scope.pressureData = [];
             $scope.pressureLabels = data.data.map(function(item){ return item.date;});
-            $scope.pressureSeries = [$rootScope.selectedStationName + ' pressure'];
+            $scope.pressureSeries = [$rootScope.selectedStationName + ' slėgis'];
             $scope.pressureData.push(data.data.map(function(item){ return item.pressure;}));
         });
     };
@@ -205,7 +205,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.lightLabels = [];
             $scope.lightData = [];
             $scope.lightLabels = data.data.map(function(item){ return item.date;});
-            $scope.lightSeries = [$rootScope.selectedStationName + ' light level'];
+            $scope.lightSeries = [$rootScope.selectedStationName + ' šviesos lygis'];
             $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
             k++;
             $scope.checkLoading();
@@ -219,7 +219,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.lightLabels = [];
             $scope.lightData = [];
             $scope.lightLabels = data.data.map(function(item){ return item.date;});
-            $scope.lightSeries = [$rootScope.selectedStationName + ' light level'];
+            $scope.lightSeries = [$rootScope.selectedStationName + ' šviesos lygis'];
             $scope.lightData.push(data.data.map(function(item){ return item.light_level;}));
         });
     };
@@ -230,7 +230,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.directionLabels = [];
             $scope.directionData = [];
             $scope.directionLabels = Object.keys(data.data);
-            $scope.directionSeries = [$rootScope.selectedStationName + ' wind direction'];
+            $scope.directionSeries = [$rootScope.selectedStationName + ' vėjo kryptis'];
             $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
             k++;
             $scope.checkLoading();
@@ -244,7 +244,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.directionLabels = [];
             $scope.directionData = [];
             $scope.directionLabels = Object.keys(data.data);
-            $scope.directionSeries = [$rootScope.selectedStationName + ' wind direction'];
+            $scope.directionSeries = [$rootScope.selectedStationName + ' vėjo kryptis'];
             $scope.directionData.push(Object.keys(data.data).map(function (key) { return data.data[key]; }));
         });
     };
@@ -255,7 +255,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.rainLabels = [];
             $scope.rainData = [];
             $scope.rainLabels = data.data.map(function(item){ return item.date;});
-            $scope.rainSeries = [$rootScope.selectedStationName + ' rain'];
+            $scope.rainSeries = [$rootScope.selectedStationName + ' krituliai'];
             $scope.rainData.push(data.data.map(function(item){ return item.rain;}));
             k++;
             $scope.checkLoading();
@@ -269,7 +269,7 @@ stationsApp.controller("ChartsController", function($scope, $routeParams, $rootS
             $scope.rainLabels = [];
             $scope.rainData = [];
             $scope.rainLabels = data.data.map(function(item){ return item.date;});
-            $scope.rainSeries = [$rootScope.selectedStationName + ' rain'];
+            $scope.rainSeries = [$rootScope.selectedStationName + ' krituliai'];
             $scope.rainData.push(data.data.map(function(item){ return item.rain;}));
         });
     };

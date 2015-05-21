@@ -70,6 +70,7 @@ int winddir_avg2m;
 float humidity; // [%]
 float tempC; // temperature in celsius
 float rainin; //60min
+float rain1m;
 volatile float dailyrainin; 
 float pressure;
 char buffer[4]; //helps convert float to string
@@ -81,13 +82,15 @@ void rainIRQ()
 // Count rain gauge bucket tips as they occur
 // Activated by the magnet and reed switch in the rain gauge, attached to input D2
 {
-  raintime = millis(); // grab current time
+  raintime = millis(); // current time
   raininterval = raintime - rainlast; // calculate interval between this and last event
-
-    if (raininterval > 10) // ignore switch-bounce glitches less than 10mS after initial edge
+  
+  
+  if (raininterval > 10) // ignore switch-bounce glitches less than 10mS after initial edge
   {
-    dailyrainin += 0.011; //Each dump is 0.011" of water
-    rainHour[minutes] += 0.011; //Increase this minute's amount of rain
+    rain1m += 0.2794;
+    dailyrainin += 0.2794;
+    rainHour[minutes] += 0.2794; //Increase this minute's amount of rain
 
     rainlast = raintime; // set up for next event
   }
@@ -158,8 +161,9 @@ void setup()
   seconds_2m = 0;
   seconds = 0;
   lastSecond = millis();
+  rain1m = 0;
 
-  Serial.println(freeRam());
+  //Serial.println(freeRam());
 }
 
 void loop()
@@ -168,12 +172,12 @@ void loop()
   if(millis() - lastSecond >= 1000)
   {
     lastSecond += 1000;
-    //Serial.println(seconds_2m);
 
     if(++seconds_2m > 59){//119
       seconds_2m = 0;
       getSensorsData();
       sendRequest();
+      rain1m = 0;
     }
 
     windspeedmph = get_wind_speed();
@@ -201,6 +205,7 @@ void loop()
 }
 
 void getSensorsData(){  
+  
   float temp = 0;
   for(int i = 0 ; i < 60 ; i++)
     temp += windspdavg[i];
@@ -239,7 +244,7 @@ String createQuery(){
   delay(20);
   query = query + "&ws=" + floatToString(buffer, windspdmph_avg2m, 2);
   delay(20);
-  query = query + "&r=" + floatToString(buffer, rainin, 2);
+  query = query + "&r=" + floatToString(buffer, rain1m, 2);
   
   return query;
 }
@@ -252,7 +257,7 @@ void sendRequest()
   char __query[query.length()];
   query.toCharArray(__query, query.length());
   Serial.println(__query);
-  numdata=inet.httpGET("158.129.18.217", 8000, __query, msg, 50);
+  numdata=inet.httpGET("www.weatherstation.needwebsite.eu", 80, __query, msg, 50);
   
 }
 

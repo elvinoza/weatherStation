@@ -6,25 +6,25 @@
                     <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
                     <table ng-table="tableParams" show-filter="true" class="table">
                         <tr ng-repeat="weather in $data" class="text-center">
-                            <td data-title="'Temperatūra'" sortable="'temperature'">
+                            <td data-title="'Temperatūra(&deg;C)'" sortable="'temperature'">
                                 <% weather.temperature %>
                             </td>
-                            <td data-title="'Drėgmė'" sortable="'humidity'">
+                            <td data-title="'Drėgmė(%)'" sortable="'humidity'">
                                 <% weather.humidity %>
                             </td>
                             <td data-title="'Šviesos lygis'" sortable="'light_level'">
                                 <% weather.light_level %>
                             </td>
-                            <td data-title="'Slėgis'" sortable="'pressure'">
+                            <td data-title="'Slėgis(Pa)'" sortable="'pressure'">
                                 <% weather.pressure %>
                             </td>
                             <td data-title="'Vėjo kryptis(&deg;)'" sortable="'wind_direction'">
                                 <% weather.wind_direction %>
                             </td>
-                            <td data-title="'Vėjo kryptis'" sortable="'wind_speed'">
+                            <td data-title="'Vėjo greitis(km/h)'" sortable="'wind_speed'">
                                 <% weather.wind_speed %>
                             </td>
-                            <td data-title="'Kritulių kiekis'" sortable="'rain'">
+                            <td data-title="'Kritulių kiekis(mm)'" sortable="'rain'">
                                 <% weather.rain %>
                             </td>
                             <td data-title="'Data'" filter="{ 'created_at': 'text' }">

@@ -66,6 +66,7 @@
 
     @section('scripts')
         <script src="../../../js/all.js"></script>
+        <script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_lt-lt.js"></script>
         <script src="../../../js/developer-all.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.6.0/ui-bootstrap-tpls.min.js"></script>
     @show

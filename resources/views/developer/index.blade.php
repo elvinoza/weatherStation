@@ -34,7 +34,7 @@
                 <div class="col-lg-8 col-lg-offset-2 animatedParent">
                     <div class="text-center">
                         <p>
-                            Mes padedame žmonėms sukurti savo orų stotelę ir žiūrėti jos informaciją internete. Informaciją galima peržiūrėti su visais irenginiais.
+                            Mes padedame žmonėms sukurti savo orų stotelę ir žiūrėti jos informaciją internete.
                         </p>
                         <p>
                             Mūsų vartotojai siųsdami mums realiu laiku duomenis iš savo stotelės, suteikia mums savo informaciją, kurią mes pateikiame visiems vartotojams.
@@ -68,7 +68,7 @@
                                     <span class="fa fa-laptop fa-2x"></span>
                                 </div>
                                 <div class="service-desc">
-                                    <h5>Internetinį puslapį</h5>
+                                    <h5>Internetinis puslapis</h5>
                                     <div class="divider-header"></div>
                                     <p>
                                         Galite žiūrėti informaciją realiu laiku, bei tyrinėti duomenis grafikų ir lentelių pagalba.
@@ -87,7 +87,7 @@
                                     <h5>Mobilus</h5>
                                     <div class="divider-header"></div>
                                     <p>
-                                        Žiūrėkite pasirinktos stotelės duomenis mobiliajame įrenginyje. Susikurkite savo taisykles, kuriuos tenkinant jus mobilusis jus informuos pranešimu.
+                                        Žiūrėkite pasirinktos stotelės duomenis mobiliajame įrenginyje. Susikurkite savo taisykles, kuriuos tenkinant jūsų mobilusis jus informuos pranešimu.
                                     </p>
                                 </div>
                             </div>

@@ -15,7 +15,7 @@
             <div class="col-md-8 col-md-offset-2 text-center inner">
                 <div class="animatedParent">
                     <h1 class="animated fadeInDown">MeteO</h1>
-                    <p class="animated fadeInUp">Susikurk nuosavą nutolusią orų stotelę ir matyk informaciją kur bebūtum su visais savo įreniais!</p>
+                    <p class="animated fadeInUp">Susikurk nuosavą nutolusią orų stotelę ir matyk informaciją kur bebūtum su visais savo įrenginiais!</p>
                 </div>
             </div>
         </div>

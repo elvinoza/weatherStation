@@ -34,7 +34,7 @@ class ApiController extends Controller {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function insert(){
-        //$app_id = Input::get('app_id');
+        //$app_id = Input::get('id');
         //$app_key = Input::get('app_key');
 
         $api = new Api("3RkTSJ", "KjdTEANlw6YPxKIPORINgmMKzQBTJtDt", $this->user);
