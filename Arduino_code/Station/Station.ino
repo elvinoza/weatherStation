@@ -89,6 +89,7 @@ void rainIRQ()
   if (raininterval > 10) // ignore switch-bounce glitches less than 10mS after initial edge
   {
     rain1m += 0.2794;
+    Serial.println(F("esu"));
     dailyrainin += 0.2794;
     rainHour[minutes] += 0.2794; //Increase this minute's amount of rain
 

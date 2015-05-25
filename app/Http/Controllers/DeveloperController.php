@@ -72,7 +72,7 @@ class DeveloperController extends Controller {
             return redirect()->route('developer.station')->with(['successful' => 'Password changed!']);
         }
         return redirect()->route('developer.station')->withErrors([
-            'email' => 'You entered wrong password!'
+            'email' => 'Dabartinis slaptažodis įvestas neteisingai!'
         ]);
     }
 

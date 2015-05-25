@@ -1,6 +1,10 @@
 <div class="container">
     <div  ng-if="loaded1 === true && loaded2 === true">
         <section class="home-section color-dark bg-gray" style="padding-top: 50px">
+            <div class="section-heading text-center">
+                <h2 class="h-bold">Stotelės duomenys</h2>
+                <div class="divider-header"></div>
+            </div>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <button ng-click="tableParams.sorting({})" class="btn btn-custom pull-right">Išvalyti rikiavimą</button>
@@ -36,10 +40,15 @@
             </div>
         </section>
         <section class="home-section color-dark bg-gray" style="padding-top: 50px" >
+            <div class="section-heading text-center">
+                <h2 class="h-bold">Visos stotelės sistemoje</h2>
+                <div class="divider-header"></div>
+            </div>
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1">
                     <button ng-click="tableParamsForStation.sorting({})" class="btn btn-custom pull-right" style="margin-bottom: 10px">Išvalyti rikiavimą</button>
-                    <table ng-table="tableParamsForStation" show-filter="false" class="table" >
+                    <table ng-table="tableParamsForStation"  show-filter="false" class="table" >
+
                         <tr ng-repeat="station in $data" class="text-center">
                             <td data-title="'Id'" sortable="'id'">
                                 <% station.id %>

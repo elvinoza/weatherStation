@@ -122,7 +122,7 @@ class Api {
             else if($format == "m"){
                 $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subMonth())
-                                ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
+                                ->select([DB::raw("Round(AVG($option),2) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
 
                                 ->groupBy('date')
                                 ->get();
@@ -130,20 +130,20 @@ class Api {
             else if($format == "d"){
                 $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subDay())
-                                ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d %Hh') AS date")])
+                                ->select([DB::raw("Round(AVG($option),2) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d %Hh') AS date")])
                                 ->groupBy('date')
                                 ->get();
             }
             else if($format == "w"){
                 $data = $this->user->weathers()
                                 ->where('created_at', '>=', Carbon::now()->subWeek())
-                                ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
+                                ->select([DB::raw("Round(AVG($option),2) as $option"), DB::raw("DATE_FORMAT(created_at, '%m-%d') AS date")])
                                 ->groupBy('date')
                                 ->get();
             } else if($format == "y"){
                 $data = $this->user->weathers()
                     ->where('created_at', '>=', Carbon::now()->subYear())
-                    ->select([DB::raw("AVG($option) as $option"), DB::raw("DATE_FORMAT(created_at, '%Y-%m') AS date")])
+                    ->select([DB::raw("Round(AVG($option),2) as $option"), DB::raw("DATE_FORMAT(created_at, '%Y-%m') AS date")])
                     ->groupBy('date')
                     ->get();
             }
@@ -177,16 +177,16 @@ class Api {
                         $data = $this->user->weathers()
                             ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '>=', $startDate)
                             ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '<=', $endDate)
-                            ->select([DB::raw("AVG($chart) as $chart"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS date")])
+                            ->select([DB::raw("Round(AVG($chart),2) as $chart"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS date")])
                             ->groupBy('date')
                             ->get();
                     } else {
                         $data = $this->user->weathers()
                             ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '>=', $startDate)
                             ->where(DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d')"), '<=', $endDate)
-                            ->select([DB::raw("AVG(temperature) as temperature"), DB::raw("AVG(humidity) as humidity"), DB::raw("AVG(light_level) as light_level"),
-                                    DB::raw("AVG(pressure) as pressure"), DB::raw("AVG(wind_direction) as wind_direction"),DB::raw("AVG(wind_speed) as wind_speed"),
-                                    DB::raw("AVG(rain) as rain"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS date")])
+                            ->select([DB::raw("Round(AVG(temperature),2) as temperature"), DB::raw("AVG(humidity) as humidity"), DB::raw("AVG(light_level) as light_level"),
+                                    DB::raw("Round(AVG(pressure),2) as pressure"), DB::raw("Round(AVG(wind_direction),2) as wind_direction"),DB::raw("Round(AVG(wind_speed),2) as wind_speed"),
+                                    DB::raw("Round(AVG(rain),2) as rain"), DB::raw("DATE_FORMAT(created_at, '%Y-%m-%d') AS date")])
                             ->groupBy('date')
                             ->get();
                     }

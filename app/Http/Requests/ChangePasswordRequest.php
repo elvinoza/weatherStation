@@ -37,7 +37,8 @@ class ChangePasswordRequest extends FormRequest {
             'current_password.required' => 'Būtina įvesti seną slaptažodį norint jį pakeisti.',
             'current_password.min' => 'Slaptažodis turi būti ilgesnis nei 8 simboliai.',
             'new_password.required' => 'Būtina įvesti naują slaptažodį norint pakeisti senajį.',
-            'new_password.min' => 'Naujas slaptažodis turi būti ilgesnis nei 8 simboliai.'
+            'new_password.min' => 'Naujas slaptažodis turi būti ilgesnis nei 8 simboliai.',
+            'new_password.confirmed' => 'Naujas slaptažodis pakartotas neteisingai.'
         );
     }
 }
