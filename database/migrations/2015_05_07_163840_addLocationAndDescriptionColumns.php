@@ -13,8 +13,8 @@ class AddLocationAndDescriptionColumns extends Migration {
 	public function up()
 	{
         Schema::table('users', function($table){
-            $table->string('Description');
-            $table->string('Location');
+            $table->string('Description')->nullable();
+            $table->string('Location')->nullable();
         });
 	}
 
