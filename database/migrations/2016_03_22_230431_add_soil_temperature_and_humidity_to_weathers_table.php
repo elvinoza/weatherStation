@@ -14,8 +14,8 @@ class AddSoilTemperatureAndHumidityToWeathersTable extends Migration {
 	{
 		Schema::table('weathers', function($table)
 		{
-			$table->double('soil_temperature', 4, 2);
-			$table->double('soil_humidity', 5, 2);
+			$table->double('soil_temperature', 4, 2)->after('rain');
+			$table->double('soil_humidity', 5, 2)->after('soil_temperature');
 		});
 	}
 

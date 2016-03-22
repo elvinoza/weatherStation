@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Weather extends Model {
 
     protected $fillable = ['temperature', 'humidity', 'light_level', 'pressure', 'wind_direction', 'wind_speed',
-                           'rain' ];
+                           'rain', 'soil_temperature', 'soil_humidity'];
 
     public function user()
     {

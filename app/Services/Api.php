@@ -56,7 +56,7 @@ class Api {
      * @param $wind_speed
      * @param $rain
      */
-    public function insertStationData($temperature, $humidity, $light_level, $pressure, $wind_direction, $wind_speed, $rain){
+    public function insertStationData($temperature, $humidity, $light_level, $pressure, $wind_direction, $wind_speed, $rain, $soil_temperature, $soil_humidity){
         $weather = new Weather(array(
             'temperature'     => $temperature,
             'humidity'        => $humidity,
@@ -64,7 +64,9 @@ class Api {
             'pressure'        => $pressure,
             'wind_direction'  => $wind_direction,
             'wind_speed'      => $wind_speed,
-            'rain'            => $rain
+            'rain'            => $rain,
+            'soil_temperature'=> $soil_temperature,
+            'soil_humidity'   => $soil_humidity
         ));
         $this->user->weathers()->save($weather);
     }
