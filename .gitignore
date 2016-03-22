@@ -4,7 +4,11 @@
 
 .idea/*
 /vendor
+/Arduino_code
 composer.phar
 bower_components/*
 node_modules/*
 resources/lib/*
+/public/js/all.js
+/public/js/developer-all.js
+/public/fonts

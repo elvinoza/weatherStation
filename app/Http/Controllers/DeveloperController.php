@@ -55,6 +55,7 @@ class DeveloperController extends Controller {
         $this->user->email = $request->email;
         $this->user->location = $request->location;
         $this->user->description = $request->description;
+        $this->user->time_min = $request->time_min;
         $this->user->save();
         return redirect()->route('developer.station');
     }

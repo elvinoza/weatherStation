@@ -34,10 +34,10 @@ class ApiController extends Controller {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function insert(){
-        //$app_id = Input::get('id');
-        //$app_key = Input::get('app_key');
+        $app_id = Input::get('id');
+        $app_key = Input::get('app_key');
 
-        $api = new Api("3RkTSJ", "KjdTEANlw6YPxKIPORINgmMKzQBTJtDt", $this->user);
+        $api = new Api($app_id, $app_key, $this->user);
 
         if($api->authenticate()){
             $api->insertStationData(Input::get('t'), Input::get('h'), Input::get('l'),
@@ -208,12 +208,21 @@ class ApiController extends Controller {
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function checkStationExist($id){
-        $api = new Api($id, null,$this->user);
+        $api = new Api($id, null, $this->user);
         $u = $this->user->find($id);
         if($u != null){
             return response()->json(array('exist'=> true));
         } else {
             return response()->json(array('exist'=> false));
         }
+    }
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function getStationUpdateTime($id){
+        $api = new Api($id, null, $this->user);
+        return response()->json($api->getTime());
     }
 }

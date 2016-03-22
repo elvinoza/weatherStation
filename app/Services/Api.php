@@ -350,7 +350,8 @@ class Api {
      * @param $directions
      * @return array
      */
-    public function getDirectionsGroupedArray($directions){
+    public function getDirectionsGroupedArray($directions)
+    {
         $grouped = [
             "Š" => 0,
             "ŠR" => 0,
@@ -362,9 +363,15 @@ class Api {
             "ŠV" => 0
         ];
 
-        foreach($directions as $direction){
+        foreach ($directions as $direction) {
             $grouped[$direction['wind_direction']] += $direction['c_direction'];
         }
         return $grouped;
+    }
+
+    public function getTime()
+    {
+        $this->user = $this->user->find($this->app_id);
+        return $this->user->time_min;
     }
 }

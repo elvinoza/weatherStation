@@ -67,6 +67,10 @@
                                 {!! Form::label('description','Aprašymas',['class'=>'control-label']) !!}
                                 {!! Form::text('description',Input::old('description'),['class'=>'form-control']) !!}
                             </div>
+                            <div class="form-group">
+                                {!! Form::label('time_min','Atnaujinimo laikas',['class'=>'control-label']) !!}
+                                {!! Form::text('time_min',Input::old('time_min'),['class'=>'form-control']) !!}
+                            </div>
                         </div>
                     </div>
 
